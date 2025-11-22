@@ -1,0 +1,30 @@
+@font-face {
+  font-family: atelier;
+  src: url(../fonts/atelier.otf);
+}
+@media only screen and (max-width: 1749px) and (min-width: 1400px) {
+  :root {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 2800px) and (min-width: 1740px) {
+  :root {
+    font-size: 25px;
+  }
+}
+#loading-screen {
+  background: black;
+  position: fixed;
+  z-index: 1000000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 300ms;
+}
+
+/*# sourceMappingURL=loadingScreen.css.map */

@@ -1,0 +1,110 @@
+@import '../scss-tools/variables';
+@import '../scss-tools/mixins';
+@import '../scss-tools/nav';
+
+body{
+  background: $bcgColor;
+  color: $textColor;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  @include flex(row, flex-end, center, 0);
+  overflow: hidden;
+
+  position: relative;
+
+  font-family: "pixelify-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.song-library{
+  width: calc(100% - $nav-width);
+  height: 100%;
+  @include flexcenter(column);
+
+  .song-list{
+    @include flexcenter(row);
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    .sl-song{
+      width: 22.5%;
+      margin: 5px;
+      cursor: pointer;
+      transition: 100ms;
+
+      @include flexcenter(column);
+      &_cover{
+        aspect-ratio: 1/1;
+        width: 80%;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.07);
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      &:hover{
+        transform: scale(1.05);
+      }
+      &_info{
+        @include flexcenter(column);
+        gap: 0;
+        margin-top: 1rem;
+        *{
+          margin: 5px;
+        }
+      }
+    }
+  }
+}
+
+[data-song="whi001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/white-cat-cover.webp");
+  }
+}
+
+
+
+[data-song="ygg001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/yggdrasil-cover.webp");
+  }
+}
+
+[data-song="dow001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/downfall-cover.webp");
+  }
+}
+
+[data-song="mor001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/downfall-album-cover.webp");
+  }
+}
+
+[data-song="asp001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/asphinal-cover.webp");
+  }
+}
+
+[data-song="ife001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/ifelt-cover.webp");
+  }
+}
+
+[data-song="now001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/nowisit-cover.webp");
+  }
+}
+
+[data-song="tre001"] {
+  div:nth-child(1) {
+    background-image: url("../imgs/song-covers/downfall-album-cover.webp");
+  }
+}

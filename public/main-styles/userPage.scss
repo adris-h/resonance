@@ -1,0 +1,344 @@
+@import '../scss-tools/variables';
+@import '../scss-tools/mixins';
+@import '../scss-tools/nav';
+
+body{
+  background: var(--bcgColor);
+  color: $textColor;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  @include flex(row, flex-start, flex-start, 0);
+  position: relative;
+
+
+}
+
+*{
+  font-family: "pixelify-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+$profile-hg: 50%;
+
+
+section{
+  width: 100%;
+  @include flex(column, flex-start, center, 0);
+  height: fit-content;
+  padding-top: 10vw;
+
+  #user-search{
+    height: 2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    @include flex(column, flex-start, center,  .5rem);
+    padding-top: 1rem;
+    top: 0;
+
+    font-size: $normalSize;
+
+    #user-search-result{
+      @include flex(row, flex-start, center,  1rem);
+      width: 20%;
+      padding: 1rem;
+      box-sizing: border-box;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      opacity: 0;
+      visibility: hidden;
+
+      background: linear-gradient(to top, rgb(11, 11, 11), rgb(15, 15, 15));
+      box-shadow: 0 0 10px rgba(74, 74, 74, 0);
+
+      border: 1px solid rgba(255, 255, 255, 0.13);
+
+      transition: 300ms;
+      &:hover{
+        background: linear-gradient(to top, rgba(11, 11, 11, 0.8), rgba(15, 15, 15, 0.8));
+        box-shadow: 0 0 20px rgba(74, 74, 74, 0.4);
+      }
+
+      &.active{
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #user-search-avatar{
+        width: 2rem;
+        aspect-ratio: 1/1;
+        background: white;
+        @include flexcenter(row);
+
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
+
+        color: black;
+        font-size: $normalSize;
+        text-transform: uppercase;
+
+        border-radius: var(--borderRadius);
+      }
+
+
+    }
+
+    #user-search-input{
+      color: white;
+      background-color: transparent;
+      border: none;
+      border-bottom: white solid 1px;
+      width: 20%;
+
+
+      &:focus{
+        outline: none;
+        border-color: var(--highlightColor);
+      }
+
+      &.error{
+        border-color: var(--errorColor);
+      }
+    }
+  }
+
+  #post-buttons{
+    width: 65%;
+    @include flexcenter(row);
+    button{
+      width: 50%;
+      cursor: pointer;
+      padding: .3rem 1rem;
+    }
+  }
+
+  #profile-posts{
+    padding-top: 1vw;
+    height: fit-content;
+    width: 65%;
+    @include flex(row, flex-start, flex-start, 1rem);
+    flex-wrap: wrap;
+
+    .preset{
+      width: 20vw;
+      aspect-ratio: 4/3;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      transition: 300ms;
+
+      &:hover{
+        box-shadow: 0 0 20px rgba(109, 109, 109, 0.12);
+      }
+
+      .preset-showcase{
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        @include flex(row, center, flex-start, 1.5vw);
+        padding-top: 2vw;
+        & > span{
+          height: 60%;
+          width: .2vw;
+          background: #1f1f1f;
+          @include flex(row, center, flex-end, 0);
+          span{
+            height: 4%;
+            width: 100%;
+            background: var(--highlightColor);
+          }
+        }
+      }
+
+      .preset-name{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        box-sizing: border-box;
+        width: 100%;
+
+        font-size: $normalSize;
+
+        @include flex(row, space-between, center, 0);
+
+        span:nth-child(2){
+          font-size: 1.5rem;
+
+            .preset-settings{
+              position: absolute;
+              right: 2rem;
+              width: fit-content + 1rem;
+              height: 5vw;
+              bottom: 0;
+              background: var(--bcgColor);
+              opacity: 0;
+              visibility: hidden;
+              transition: 300ms;
+              border-radius: 10px;
+              border: 1px solid rgba(255, 255, 255, 0.09);
+
+              padding: 0 1rem;
+              box-sizing: border-box;
+              @include flex(column, center, flex-end, 0);
+
+              a{
+                font-size: 1rem;
+                transition: 300ms;
+              }
+
+              .delete-preset-button{
+                &:hover{
+                  color: red;
+                }
+              }
+
+              .edit-preset-button, .like-preset-button, .save-preset-button{
+                &:hover{
+                  color: $highlightColor;
+                }
+              }
+          }
+
+          &:hover{
+            .preset-settings{
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  #user-container{
+    width: 100%;
+    height: $profile-hg;
+    @include flex(row, center, flex-end, 1rem);
+    padding: 1rem;
+    box-sizing: border-box;
+
+    #user-avatar{
+      width: 10vw;
+      aspect-ratio: 1/1;
+      background: white;
+      @include flexcenter(row);
+
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
+
+      color: black;
+      font-size: $headingSize;
+      text-transform: uppercase;
+
+      border-radius: var(--borderRadius);
+    }
+
+    #profile-info{
+      @include flexcenter(column);
+      width: 30vw;
+      #profile-header{
+        width: 100%;
+        @include flex(column, center, flex-start, 0);
+        h1{
+          margin: 0;
+          text-align: left;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+          font-size: $headingSize;
+        }
+        #profile-id{
+          cursor: pointer;
+          margin: 0;
+          color: $unselectedColor;
+          font-size: $normalSize;
+        }
+      }
+      #profile-buttons{
+        width: 100%;
+        @include flexcenter(row);
+        gap: 1rem;
+        a{
+          margin: 0;
+          width: 100% ;
+          @include flexcenter(column);
+          text-align: center;
+          text-decoration: none;
+          color: var(--textColor);
+          transition: 300ms;
+
+          &:hover{
+            opacity: 0.7;
+          }
+        }
+      }
+      #profile-bio{
+        font-size: $normalSize;
+        margin: .5em 0 .5em 0;
+        color: $unselectedColor;
+        text-align: left;
+      }
+    }
+  }
+
+  #delete-preset-container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(.5);
+
+    background: rgba(0, 0, 0, 0.14);
+    box-shadow: 0 4px 30px rgba(150, 150, 150, 0.1);
+    backdrop-filter: blur(15.6px);
+    border: 1px solid rgba(123, 123, 123, 0.16);
+    border-radius: 15px;
+    width: 20vw;
+    height: 20vh;
+
+    visibility: hidden;
+    opacity: 0;
+
+    @include flexcenter(column);
+
+    transition: 300ms;
+
+    &.active{
+      visibility: visible;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    button{
+      cursor: pointer;
+
+    }
+  }
+}
+
+
+
+.user-wrapper{
+  height: 100vh;
+  width: 100vw;
+  @include flexcenter(column);
+  gap: 1rem;
+  h1{
+    margin: 0;
+    font-family: atelier;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+  }
+  #continue-button{
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  p{
+    width: 40%;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main-styles/userPage.css">
+    <title>user</title>
+    <link rel="stylesheet" href="https://use.typekit.net/dhk5kym.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script defer src="javascript/main.js" type="module"></script>
+    <script async defer src="javascript/menuPopUp.js"></script>
+    <script defer src="javascript/searchUser.js" type="module"></script>
+    <script defer src="javascript/searchedUserProfile.js" type="module"></script>
+</head>
+<body>
+<nav>
+    <a href="main.html"> < to main</a>
+</nav>
+
+<section>
+    <div id="user-search">
+        <input type="text" name="user-search" id="user-search-input" placeholder="enter friend's id">
+        <a id="user-search-result">
+            no user found
+        </a>
+    </div>
+    <div id="user-container">
+        <div id="user-avatar" class="unselectable user-profile-picture"></div>
+        <div id="profile-info">
+            <div id="profile-header">
+                <h1 id="profile-username" class="username">Username</h1>
+                <p id="profile-id" class="profile-id">copy id</p>
+            </div>
+            <p id="profile-bio">This is users bio</p>
+            <div id="profile-buttons">
+                <a href="" id="follow-button">follow</a>
+                <a href="">following</a>
+            </div>
+        </div>
+    </div>
+    <div id="profile-posts"></div>
+</section>
+<div class="user-profile">
+    <a class="menu_button"><span class="unselectable user-profile-picture">u</span></a>
+    <menu class=user-profile_menu>
+        <a href="user.html">Your Profile</a>
+        <a href=""> Edit Mode</a>
+        <a href="settings/profile.html">Settings</a>
+        <a href="index.html" id="sign-out-button">Sign Out</a>
+    </menu>
+</div>
+
+</body>
+</html>

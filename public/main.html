@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0 ,user-scalable=no"/>
+      <title>Main</title>
+    <link rel="stylesheet" href="main-styles/mainStyle.css">
+    <link rel="stylesheet" href="https://use.typekit.net/dhk5kym.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="libraries/BeatDetect.bundle.js"></script>
+
+    <link rel="stylesheet" href="main-styles/loadingScreen.css">
+
+<!-- Java Script -->
+    <script defer src="javascript/loadingScreen.js"></script>
+    <script defer src="javascript/preload.js"></script>
+    <script defer src="javascript/audioPlay.js" type="module"></script>
+    <script defer src="javascript/main.js" type="module"></script>
+    <script defer src="javascript/menuPopUp.js"></script>
+    <script defer src="javascript/vinylToggle.js"></script>
+    <script defer src="javascript/equalizer.js" type="module"></script>
+    <script defer src="javascript/theme.js"></script>
+    <script defer src="javascript/importSong.js" type="module"></script>
+
+    <script src="javascript/chooseSong.js" type="module"></script>
+    <script defer src="javascript/showLibrary.js" type="module"></script>
+    <script defer src="javascript/getBPM.js"></script>
+
+    <script defer src="javascript/getInfo.js" type="module"></script>
+  </head>
+  <body>
+    <div id="loading-screen">
+      <p>loading please wait...</p>
+    </div>
+    <nav>
+      <a class="app-logo" href="main.html"></a>
+      <div class="nav-buttons">
+        <a href="msg.html"><i class="fa-solid fa-comments"></i></a>
+        <a href="library.html" class="song-library-button">
+          <?xml version="1.0" encoding="UTF-8"?>
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 743.19 701.65">
+            <defs>
+              <style>
+                .cls-1 {
+                  stroke: #ffffff;
+                  stroke-miterlimit: 10;
+                }
+              </style>
+            </defs>
+            <rect class="cls-1" x=".5" y="7.93" width="167.55" height="666.12" rx="29.54" ry="29.54"/>
+            <rect class="cls-1" x="228.78" y="126.71" width="167.55" height="550.36" rx="29.54" ry="29.54"/>
+            <path class="cls-1" d="M709.48,680.52l-75.86,19.2c-23.79,6.02-48.16-7.63-54.43-30.49L415.87,73.42c-6.27-22.86,7.94-46.28,31.73-52.3L523.47,1.92c23.79-6.02,48.16,7.63,54.43,30.49l163.31,595.81c6.27,22.86-7.94,46.28-31.73,52.3Z"/>
+          </svg>
+        </a>
+        <a><i class="fa-solid fa-bookmark"></i></a>
+      </div>
+    </nav>
+    <audio class="audio"   id="audio" loop>
+      <source src="" type="audio/mp3">
+    </audio>
+    <audio class="audio2" id="audio2" loop>
+      <source src="" type="audio/mp3">
+    </audio>
+    <section id="main">
+      <div class="song-import-wrapper hidden">
+        <span>
+          <button class="close-import-button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </span>
+        <div>
+          <label for="import-song-name">Song Name</label>
+          <input type="text" name="song-name" id="import-song-name">
+
+
+          <label for="import-artist-name">Artist Name</label>
+          <input type="text" name="artist-name" id="import-artist-name">
+
+          <span>
+            <p>select a deck</p>
+            <span>
+              <button id="deck1btn" class="outer deck-button active">
+                <span class="inner">
+                  <i class="inner-text">deck 1</i>
+                </span>
+              </button>
+              <button id="deck2btn" class="outer deck-button">
+                <span class="inner">
+                  <i class="inner-text">deck 2</i>
+                </span>
+              </button>
+            </span>
+          </span>
+
+
+          <span>
+            <label for="song-file-import">Choose file</label>
+            <span class="file-name">No file chosen</span>
+          </span>
+
+
+          <input type="file" id="song-file-import" accept="audio/*" hidden>
+
+
+        </div>
+        <button class="file-submit">Submit</button>
+
+
+      </div>
+
+      <label class="volume-slider" id="volume-slider" for="vol">
+        <input type="range" name="volume slider" id="vol" max="100" min="0" value="50" step="0.001">
+        <p id="volume-value">50%</p>
+      </label>
+      <div class="main-wrapper">
+        <div class="main-wrapper_audio-visualiser">
+          <div class="vinyl-toggle-wrapper">
+            <button id="cover-button" class="outer">
+              <span class="inner">
+                <i class="inner-text">cover</i>
+              </span>
+            </button>
+            <button id="vinyl-button" class="outer">
+              <span class="inner">
+                <i class="inner-text">vinyl</i>
+              </span>
+            </button>
+          </div>
+          <div class="main-song-info">
+            <div class="song-cover vinyl">
+              <div class="triangle t01"></div>
+              <div class="triangle t02"></div>
+              <div class="vinyl-line line1"></div>
+              <div class="vinyl-line line2"></div>
+              <div class="vinyl-line line3"></div>
+              <div class="vinyl-line line4"></div>
+              <div class="vinyl-line line5"></div>
+              <div class="vinyl-line line6"></div>
+              <div class="vinyl-line line7"></div>
+              <div class="vinyl-line line8"></div>
+              <div class="vinyl-line line9"></div>
+              <div class="vinyl-line line10"></div>
+              <div class="vinyl-line line11"></div>
+
+              <div class="song_cover"></div>
+              <div class="vinyl-line middle"></div>
+            </div>
+            <div class="audio-info">
+              <span>
+                <p class="song-name" id="song-name_hover">Song Name</p>
+                <p class="artist-name">Artist Name</p>
+                <span class="song-choice" id="song-choice_pop-up">
+                  <a href="library.html">song library</a>
+<!--                  <a class="file-import"> import audio</a>-->
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="song-controls">
+            <div class="song-controls_slider">
+              <input type="range" id="volume" name="volume"/>
+              <label for="volume"></label>
+              <div>
+                <span id="current-song-time">0:00</span>
+                <span id="song-duration">0:00</span>
+              </div>
+            </div>
+            <div class="song-controls_buttons" >
+              <div>
+                <button id="start-song-button" class="button">
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3">
+                        <defs>
+                            <style>
+                                .b {
+                                    fill: #fff;
+                                }
+                            </style>
+                        </defs>
+                        <rect class="b" x="2" y="2" width="1" height="1"/>
+                        <rect class="b" x="1" y="1" width="1" height="1"/>
+                        <rect class="b" x="3" y="1" width="1" height="1"/>
+                        <rect class="b" x="4" width="1" height="1"/>
+                        <rect class="b" width="1" height="1"/>
+                    </svg>
+
+                </button>
+                <button class="play-button button">
+                  <?xml version="1.0" encoding="UTF-8"?>
+                  <?xml version="1.0" encoding="UTF-8"?>
+                  <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                  <svg width="100%" height="100%" viewBox="0 0 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g>
+        <g transform="matrix(9,0,0,9,-16,-16)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+      <g transform="matrix(5,0,0,1,-6,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+      <g transform="matrix(5,0,0,1,-6,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+      <g transform="matrix(-0.00309,4.999999,-1,-0.000618,4.007724,-5.998761)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+      <g transform="matrix(-0.00309,4.999999,-1,-0.000618,14.009269,-5.998453)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+    </g>
+                    <g>
+        <g transform="matrix(1,0,0,1,4,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,5,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,3,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,2,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,6,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,7,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,8,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,9,0)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,9,1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,10,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,10,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,10,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,10,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,10,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,9,7)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,9,8)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,8,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,7,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,6,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,5,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,4,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,3,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,2,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,1,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,1,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,0,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-1,8)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-1,7)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-1,7)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-2,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-2,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-2,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-2,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-2,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-2,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-1,1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-1,0)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,-1,0)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,0,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,1,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+    </g>
+                    <g transform="matrix(1,0,0,1,1,0)">
+        <g transform="matrix(1,0,0,1,3,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,3,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,3,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,3,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,3,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,4,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,4,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,4,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,3,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,2,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,2,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,2,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,2,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,2,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                      <g transform="matrix(1,0,0,1,5,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+    </g>
+</svg>
+
+                </button>
+                <button id="end-song-button" class="button">
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3">
+                        <defs>
+                            <style>
+                                .b {
+                                    fill: #fff;
+                                }
+                            </style>
+                        </defs>
+                        <rect class="b" x="2" y="2" width="1" height="1"/>
+                        <rect class="b" x="1" y="1" width="1" height="1"/>
+                        <rect class="b" x="3" y="1" width="1" height="1"/>
+                        <rect class="b" x="4" width="1" height="1"/>
+                        <rect class="b" width="1" height="1"/>
+                    </svg>
+
+                </button>
+              </div>
+              <div>
+                <!--<span id="volume-button">
+                  <i class="fa-solid fa-volume-low" ></i>
+                </span>-->
+                <span class="bpm-wrapper">BPM: <span id="bpm">calculating...</span> </span>
+                <!--<select name="audio-speed" id="audio-speed">
+                  <option value="0.5x">0.5x</option>
+                  <option value="1x">1x</option>
+                  <option value="1.5x">1.5x</option>
+                  <option value="2x">2x</option>
+                </select>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--
+          <div class="main-wrapper_audio-controls">
+          <div class="wrapper"></div>
+        </div>
+        -->
+      </div>
+      <div class="side-wrapper">
+        <div class="side-wrapper_source-toggle">
+          <button id="source1-toggle" class="outer active">
+              <span class="inner">
+                <i class="inner-text">1 track</i>
+              </span>
+          </button>
+          <button id="source2-toggle" class="outer">
+              <span class="inner">
+                <i class="inner-text">2 tracks</i>
+              </span>
+          </button>
+        </div>
+        <div class="top_wrapper">
+          <div class="eq-toggle hidden">
+            <button id="source1-button" class="outer">
+              <span class="inner">
+                <i class="inner-text">src 1</i>
+              </span>
+            </button>
+            <button id="source2-button" class="outer">
+              <span class="inner">
+                <i class="inner-text">src 2</i>
+              </span>
+            </button>
+          </div>
+          <div class="eq-track-toggle">
+            <button class="outer active eq-track-button" id="eq-track-button-1">
+              <span class="inner">
+                <i class="inner-text">1</i>
+              </span>
+            </button>
+            <button class="outer eq-track-button" id="eq-track-button-2">
+              <span class="inner">
+                <i class="inner-text">2</i>
+              </span>
+            </button>
+          </div>
+          <div id="eq1" class="eq-settings">
+            <div class="equalizer">
+              <div class="values">
+                <span class="max-eq">12dB</span>
+                <span class="mid-eq">0dB</span>
+                <span class="min-eq">-12dB</span>
+              </div>
+              <div class="sliders">
+                <div class="band band-1">
+                  <input type="range" class="eq-slider slider32"   max="12" min="-12" value="0">
+                  <label ><span>32</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-2">
+                  <input type="range" class="eq-slider slider64"  max="12" min="-12" value="0">
+                  <label><span>64</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-3">
+                  <input type="range" class="eq-slider slider125" max="12" min="-12" value="0">
+                  <label><span>125</span> <br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-4">
+                  <input type="range" class="eq-slider slider250"  max="12" min="-12" value="0">
+                  <label><span>250</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-5">
+                  <input type="range" class="eq-slider slider500"  max="12" min="-12" value="0">
+                  <label ><span>500</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-6">
+                  <input type="range" class="eq-slider slider1k"   max="12" min="-12" value="0">
+                  <label ><span>1k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-7">
+                  <input type="range" class="eq-slider slider2k"   max="12" min="-12" value="0">
+                  <label><span>2k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-8">
+                  <input type="range" class="eq-slider slider4k"  max="12" min="-12" value="0">
+                  <label><span>4k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-9">
+                  <input type="range" class="eq-slider slider8k"   max="12" min="-12" value="0">
+                  <label ><span>8k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-10">
+                  <input type="range" class="eq-slider slider16k"   max="12" min="-12" value="0">
+                  <label><span>16k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+              </div>
+            </div>
+            <div class="eq-buttons">
+              <button class="preset-save-button outer">
+              <span class="inner">
+                <i class="inner-text">save preset</i>
+              </span>
+              </button>
+              <select name="eq-presets" class="eq-presets">
+                <option value="custom" class="custom-eq">Manual</option>
+                <option value="flat" class="inner">Flat</option>
+                <option value="bass-boosted" class="inner">Bass Boosted</option>
+                <option value="jazz" class="inner">Jazz</option>
+                <option value="rnb" class="inner">RnB</option>
+                <option value="pop" class="inner">Pop</option>
+                <option value="max" class="max">BLOW YOUR EARS OUT</option>
+              </select>
+            </div>
+          </div>
+          <div id="eq2" class="eq-settings hidden">
+            <div class="equalizer">
+              <div class="values">
+                <span class="max-eq">12dB</span>
+                <span class="mid-eq">0dB</span>
+                <span class="min-eq">-12dB</span>
+              </div>
+              <div class="sliders">
+                <div class="band band-1">
+                  <input type="range" class="eq-slider slider32"   max="12" min="-12" value="0">
+                  <label><span>32</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-2">
+                  <input type="range" class="eq-slider slider64"  max="12" min="-12" value="0">
+                  <label><span>64</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-3">
+                  <input type="range" class="eq-slider slider125" max="12" min="-12" value="0">
+                  <label><span>125</span> <br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-4">
+                  <input type="range" class="eq-slider slider250"  max="12" min="-12" value="0">
+                  <label for="slider250"><span>250</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-5">
+                  <input type="range" class="eq-slider slider500"  max="12" min="-12" value="0">
+                  <label for="slider500"><span>500</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-6">
+                  <input type="range" class="eq-slider slider1k"   max="12" min="-12" value="0">
+                  <label for="slider1k"><span>1k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-7">
+                  <input type="range" class="eq-slider slider2k"   max="12" min="-12" value="0">
+                  <label for="slider2k"><span>2k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-8">
+                  <input type="range" class="eq-slider slider4k"  max="12" min="-12" value="0">
+                  <label for="slider4k"><span>4k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-9">
+                  <input type="range" class="eq-slider slider8k"   max="12" min="-12" value="0">
+                  <label ><span>8k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+                <div class="band band-10">
+                  <input type="range" class="eq-slider slider16k"   max="12" min="-12" value="0">
+                  <label><span>16k</span><br>Hz</label>
+                  <span class="eq-slider-value">0</span>
+                </div>
+              </div>
+            </div>
+            <div class="eq-buttons">
+              <button id="save-eq" class="outer preset-save-button">
+              <span class="inner">
+                <i class="inner-text">save preset</i>
+              </span>
+              </button>
+              <select name="eq-presets" id="eq-presets" class="eq-presets">
+                <option value="custom" id="custom-eq">Manual</option>
+                <option value="flat" class="inner">Flat</option>
+                <option value="bass-boosted" class="inner">Bass Boosted</option>
+                <option value="jazz" class="inner">Jazz</option>
+                <option value="rnb" class="inner">RnB</option>
+                <option value="pop" class="inner">Pop</option>
+                <option value="max" id="max">BLOW YOUR EARS OUT</option>
+              </select>
+            </div>
+          </div>
+          <div class="queue"></div>
+        </div>
+      </div>
+      <div class="main-wrapper second-source hidden">
+
+        <div class="main-wrapper_audio-visualiser">
+          <div class="vinyl-toggle-wrapper">
+            <button id="cover2-button" class="outer">
+              <span class="inner">
+                <i class="inner-text">cover</i>
+              </span>
+            </button>
+            <button id="vinyl2-button" class="outer">
+              <span class="inner">
+                <i class="inner-text">vinyl</i>
+              </span>
+            </button>
+          </div>
+          <div class="main-song-info">
+            <div class="song-cover vinyl">
+              <div class="triangle t01"></div>
+              <div class="triangle t02"></div>
+              <div class="vinyl-line line1"></div>
+              <div class="vinyl-line line2"></div>
+              <div class="vinyl-line line3"></div>
+              <div class="vinyl-line line4"></div>
+              <div class="vinyl-line line5"></div>
+              <div class="vinyl-line line6"></div>
+              <div class="vinyl-line line7"></div>
+              <div class="vinyl-line line8"></div>
+              <div class="vinyl-line line9"></div>
+              <div class="vinyl-line line10"></div>
+              <div class="vinyl-line line11"></div>
+
+              <div class="song_cover"></div>
+              <div class="vinyl-line middle"></div>
+            </div>
+            <div class="audio-info">
+              <span>
+                <p class="song-name">Choose a song</p>
+                <p class="artist-name">:3333</p>
+                <span class="song-choice">
+                  <a href="library.html">song library</a>
+                  <a class="file-import"> import audio</a>
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="song-controls">
+            <div class="song-controls_slider">
+              <input type="range" id="volume2" name="volume"/>
+              <label for="volume"></label>
+              <div>
+                <span id="current-song2-time">0:00</span>
+                <span id="song2-duration">0:00</span>
+              </div>
+            </div>
+            <div class="song-controls_buttons" >
+              <div>
+                  <button id="start-song-button-2" class="button">
+                      <?xml version="1.0" encoding="UTF-8"?>
+                      <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3">
+                          <defs>
+                              <style>
+                                  .b {
+                                      fill: #fff;
+                                  }
+                              </style>
+                          </defs>
+                          <rect class="b" x="2" y="2" width="1" height="1"/>
+                          <rect class="b" x="1" y="1" width="1" height="1"/>
+                          <rect class="b" x="3" y="1" width="1" height="1"/>
+                          <rect class="b" x="4" width="1" height="1"/>
+                          <rect class="b" width="1" height="1"/>
+                      </svg>
+
+                  </button>
+                  <button class="play-button button">
+                      <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                      <svg width="100%" height="100%" viewBox="0 0 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g>
+        <g transform="matrix(9,0,0,9,-16,-16)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+        <g transform="matrix(5,0,0,1,-6,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+        <g transform="matrix(5,0,0,1,-6,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+        <g transform="matrix(-0.00309,4.999999,-1,-0.000618,4.007724,-5.998761)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+        <g transform="matrix(-0.00309,4.999999,-1,-0.000618,14.009269,-5.998453)">
+            <rect x="2" y="2" width="1" height="1" style="fill:white;"/>
+        </g>
+    </g>
+                          <g>
+        <g transform="matrix(1,0,0,1,4,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,5,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,3,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,2,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,6,-2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,7,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,8,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,9,0)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,9,1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,10,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,10,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,10,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,10,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,10,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,9,7)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,9,8)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,8,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,7,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,6,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,5,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,4,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,3,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,2,10)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,1,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,1,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,0,9)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-1,8)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-1,7)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-1,7)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-2,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-2,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-2,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-2,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-2,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-2,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-1,1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-1,0)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,-1,0)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,0,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,1,-1)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+    </g>
+                          <g transform="matrix(1,0,0,1,1,0)">
+        <g transform="matrix(1,0,0,1,3,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,3,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,3,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,3,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,3,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,4,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,4,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,4,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,3,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,2,2)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,2,3)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,2,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,2,5)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,2,6)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+                              <g transform="matrix(1,0,0,1,5,4)">
+            <rect x="2" y="2" width="1" height="1" style="fill:rgb(13,0,0);"/>
+        </g>
+    </g>
+</svg>
+
+                  </button>
+                  <button id="end-song-button-2" class="button">
+                      <?xml version="1.0" encoding="UTF-8"?>
+                      <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3">
+                          <defs>
+                              <style>
+                                  .b {
+                                      fill: #fff;
+                                  }
+                              </style>
+                          </defs>
+                          <rect class="b" x="2" y="2" width="1" height="1"/>
+                          <rect class="b" x="1" y="1" width="1" height="1"/>
+                          <rect class="b" x="3" y="1" width="1" height="1"/>
+                          <rect class="b" x="4" width="1" height="1"/>
+                          <rect class="b" width="1" height="1"/>
+                      </svg>
+
+                  </button>
+              </div>
+              <div>
+                <span class="bpm-wrapper">BPM: <span id="bpm-2">calculating...</span> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <label class="volume-slider hidden" id="volume-slider-2" for="vol-2">
+        <input type="range" name="volume slider" id="vol-2" max="100" min="0" value="50" step="0.001">
+        <p id="volume-value-2">50%</p>
+      </label>
+
+
+    </section>
+    <section id="song-library">
+      <a id="lib-btn">
+        <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3">
+          <defs>
+            <style>
+              .b {
+                fill: #fff;
+              }
+            </style>
+          </defs>
+          <rect class="b" x="2" y="2" width="1" height="1"/>
+          <rect class="b" x="1" y="1" width="1" height="1"/>
+          <rect class="b" x="3" y="1" width="1" height="1"/>
+          <rect class="b" x="4" width="1" height="1"/>
+          <rect class="b" width="1" height="1"/>
+        </svg>
+      </a>
+      <span id="audio-choice">
+        <span>
+          <button id="foraudio-1" class="outer active">
+          <span class="inner">
+            <i class="inner-text">deck 1 </i>
+          </span>
+          </button>
+          <button id="foraudio-2" class="outer">
+            <span class="inner">
+              <i class="inner-text">deck 2 </i>
+            </span>
+          </button>
+        </span>
+
+        <button id="file-import">import your own</button>
+      </span>
+
+
+      <div class="song-library-wrapper">
+        <span id="arrow-holder">
+        <a href="#scroll-left" >
+          <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3">
+          <defs>
+            <style>
+              .b {
+                fill: #fff;
+              }
+            </style>
+          </defs>
+          <rect class="b" x="2" y="2" width="1" height="1"/>
+          <rect class="b" x="1" y="1" width="1" height="1"/>
+          <rect class="b" x="3" y="1" width="1" height="1"/>
+          <rect class="b" x="4" width="1" height="1"/>
+          <rect class="b" width="1" height="1"/>
+        </svg>
+        </a>
+        <a href="#scroll-right">
+          <svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 3">
+          <defs>
+            <style>
+              .b {
+                fill: #fff;
+              }
+            </style>
+          </defs>
+          <rect class="b" x="2" y="2" width="1" height="1"/>
+          <rect class="b" x="1" y="1" width="1" height="1"/>
+          <rect class="b" x="3" y="1" width="1" height="1"/>
+          <rect class="b" x="4" width="1" height="1"/>
+          <rect class="b" width="1" height="1"/>
+        </svg>
+        </a>
+      </span>
+
+        <!--<h2>Choose a song pwease!</h2>-->
+        <div class="song-list">
+          <div class="sl-song song-button" data-song="ygg001" id="scroll-left">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">Yggdrasil</h4>
+              <h4>Asphinal</h4>
+            </div>
+          </div>
+          <div class="sl-song song-button" data-song="dow001">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">Downfall</h4>
+              <h4>Asphinal</h4>
+            </div>
+          </div>
+          <div class="sl-song song-button" data-song="ife001">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">I Felt Your Hands</h4>
+              <h4>Asphinal</h4>
+            </div>
+          </div>
+          <div class="sl-song song-button" data-song="mor001">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">Morning</h4>
+              <h4>Asphinal</h4>
+            </div>
+          </div>
+          <div class="sl-song song-button" data-song="now001">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">Now I Sit In Melancholy</h4>
+              <h4>Asphinal</h4>
+            </div>
+          </div>
+          <div class="sl-song song-button" data-song="tre001">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">Treeturn</h4>
+              <h4>Asphinal</h4>
+            </div>
+          </div>
+          <div class="sl-song song-button" data-song="whi001">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">White Cat</h4>
+              <h4>Yves</h4>
+            </div>
+          </div>
+          <div class="sl-song song-button" data-song="asp001" id="scroll-right">
+            <div class="sl-song_cover"></div>
+            <div class="sl-song_info">
+              <h4 class="song-name">Asphinal</h4>
+              <h4>Asphinal</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--<div id="error-floater"></div>-->
+    <div class="user-profile">
+      <a class="menu_button"><span id="user-profile" class="unselectable user-profile-picture">u</span></a>
+      <menu class=user-profile_menu>
+        <a href="user.html">Your Profile</a>
+        <a href="settings/keybinds.html"> Keybinds </a>
+        <a href="settings/profile.html">Settings</a>
+        <a href="index.html" id="sign-out-button">Sign Out</a>
+      </menu>
+    </div>
+
+    <div class="preset-save-bcg">
+      <div class="preset-save">
+      <span>
+          <button class="close-preset-save">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+      </span>
+        <div>
+          <label for="preset-name">enter preset name</label>
+          <input type="text" name="preset-name" id="preset-name">
+          <button class="save-eq">save preset to profile</button>
+        </div>
+      </div>
+    </div>
+    <div class="background"></div>
+  </body>
+</html>

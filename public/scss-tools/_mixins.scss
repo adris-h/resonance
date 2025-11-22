@@ -1,0 +1,127 @@
+@mixin flexcenter($dir) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex($dir, $juco, $alit, $gap){
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $juco;
+  align-items: $alit;
+  gap: $gap;
+}
+
+%main-font{
+  font-family: "interpol-correspondence", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+%heading-font{
+  font-family: "century-gothic", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: atelier;
+  src: url(../fonts/atelier.otf);
+}
+
+@mixin button{
+  .outer{
+    cursor: pointer;
+    height: 1.8em;
+    border: none;
+    background: linear-gradient(to top, #10101F 0%, rgba(42, 43, 46, 0.6) 100%);
+    padding: 0;
+    @include flexcenter(row);
+    color: rgba(255, 255, 255, 0.15);
+    transition: var(--transition);
+
+    .inner{
+      width: 98%;
+      height: 93%;
+      transition: var(--transition);
+      padding: 0 .5em;
+      @include flexcenter(row);
+      font-size: 1em;
+      background: rgb(16, 16, 22);
+      background: linear-gradient(179deg, rgb(19, 19, 28) 0%, rgb(13, 13, 18) 100%);
+      .inner-text{
+        font-style: normal;
+        transition: var(--transition)s;
+      }
+    }
+    &.active{
+      z-index: 3;
+      .inner{
+        width: 100%;
+        height: 100%;
+        background: #66D1FF;
+        background: radial-gradient(circle,rgba(102, 209, 255, 1) 0%, rgba(6, 183, 253, 1) 56%, rgba(2, 105, 184, 1) 100%);
+        box-shadow: rgba(102, 209, 255, 0.44) 0 0 30px;
+
+        color: #000000;
+      }
+    }
+    &:active {
+      .inner{
+        .inner-text {
+          transform: scale(.9);
+        }
+      }
+    }
+  }
+}
+
+
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == xlarge {
+    @media only screen and (max-width: 2800px) and (min-width: 1740px) {
+      @content;
+    }
+  } @else if $breakpoint == desktop {
+    @media only screen and (max-width: 1749px) and (min-width: 1400px) {
+      @content;
+    }
+  } @else if $breakpoint == laptop {
+    @media only screen and (max-width: 1400px) and (min-width: 1001px) {
+      @content;
+    }
+  } @else if $breakpoint == tablet {
+    @media only screen and (max-width: 1000px) and (min-width: 900px) {
+      @content;
+    }
+  }@else if $breakpoint == mobile-tablet {
+    @media only screen and (max-width: 900px) {
+      @content;
+    }
+  } @else if $breakpoint == mobile {
+    @media only screen and (max-width: 760px) {
+      @content;
+    }
+  } @else if $breakpoint == portrait {
+    @media (orientation: portrait) {
+      @content;
+    }
+  } @else if $breakpoint == no-hover {
+    @media (hover: none) {
+      @content;
+    }
+  }
+}
+@include responsive(desktop) {
+  :root {
+    font-size: 22px;
+  }
+}
+
+@include responsive(xlarge) {
+  :root {
+    font-size: 25px;
+  }
+}

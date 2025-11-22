@@ -1,0 +1,197 @@
+@import '../scss-tools/variables';
+@import '../scss-tools/mixins';
+@import '../scss-tools/nav';
+@import '../scss-tools/body';
+
+
+#main-content{
+  //width: calc(100% - $nav-width);
+  width: 100%;
+  height: 100%;
+  @include flexcenter(row);
+  .settings-nav{
+    box-shadow: inset 0 0 20px black;
+    width: 30%;
+    height: 100%;
+    padding-top: 20%;
+    @include flex(column, flex-start, center, center);
+    gap: 1rem;
+    h2{
+      margin: 1rem 0 0 0;
+      width: 70%;
+      font-size: .8rem;
+      opacity: .2;
+    }
+    a{
+      color: white;
+      height: 2.5rem;
+      @include flexcenter(row);
+      width: 60%;
+      transition: 0.3s;
+      text-decoration: none;
+      cursor: pointer;
+      border-radius: 10px;
+
+      span{
+        padding-left: 1rem;
+        width: 100%;
+        height: 100%;
+        @include flex(row, flex-start, center, 0);
+      }
+
+      &:hover{
+        color: var(--highlightColor);
+      }
+
+      &.active, &.active:hover{
+        color: var(--highlightColor);
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.22);
+      }
+
+    }
+  }
+  .settings-container{
+    background: rgba(0, 0, 0, 0.16);
+    height: 100%;
+    width: 80%;
+    @include flexcenter(column);
+    &_wrapper{
+      width: 80%;
+    }
+  }
+
+}
+
+
+#profile-container{
+  .settings-container_wrapper{
+    h1{
+      margin: 0;
+    }
+    width: 60%;
+    @include flex(column, center, flex-start, 0);
+    .edit-profile{
+      width: 100%;
+      @include flex(column, center, flex-end, 2rem);
+      h2{
+        text-align: left;
+        font-size: 1rem;
+        opacity: .2;
+        margin-top: 1.5rem;
+      }
+      div{
+        width: 100%;
+        @include flex(column, flex-start, flex-start, 0);
+
+      }
+      @include button();
+
+      button{
+        margin-top: 1rem;
+        margin-right: 0;
+        border-radius: 10px;
+      }
+    }
+  }
+
+}
+
+*{
+  //border: 1px solid red;
+}
+
+input, textarea{
+  padding: .5rem;
+  width: 100%;
+  position: relative;
+  outline: none;
+  border: none;
+  margin: 0;
+
+  box-sizing: border-box;
+
+  background: transparent;
+  color: white;
+
+  font-size: 1rem;
+
+  border-bottom: .1rem solid white;
+  transition: 300ms;
+
+  &:focus{
+    border-bottom: .1rem solid var(--highlightColor);
+  }
+}
+
+#keybinds-container{
+
+
+  p{
+    opacity: .2;
+  }
+  .edit-keybinds{
+    overflow-y: auto;
+    overflow-x: visible;
+    max-height: 70vh;
+
+    h3{
+      opacity: .2;
+      //transform:  translate(-1rem);
+    }
+
+    /**{
+      border: 1px solid red;
+    }*/
+
+    div{
+      padding-left: 1rem;
+      width: 90%;
+      @include flex(row, space-between, center, 1rem);
+
+      span{
+        width: 6.5rem;
+        text-align: center;
+      }
+      div:nth-child(1){
+        @include flex(column, center, flex-start, 0);
+        h2{
+          line-height: 1rem;
+          margin: 0;
+        }
+      }
+
+
+
+      button{
+        background: rgba(255, 255, 255, 0.1);
+        //border: 1px solid var(--highlightColor);
+        border: none;
+        margin: 0;
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+
+        width: 6.5rem;
+        @include flexcenter(row);
+
+        padding: .6rem 1rem;
+
+        outline: none;
+
+        &.active{
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+  }
+}
+
+#keybinds-button{
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+
+  button{
+    cursor: pointer;
+  }
+}

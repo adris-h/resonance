@@ -1,0 +1,18 @@
+body{
+  background: var(--bcgColor);
+  color: $textColor;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  @include flex(row, flex-end, center, 0);
+  overflow: hidden;
+  position: relative;
+
+
+}
+
+*{
+  font-family: "pixelify-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}

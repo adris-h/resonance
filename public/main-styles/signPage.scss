@@ -1,0 +1,320 @@
+@import "../scss-tools/variables";
+@import "../scss-tools/mixins";
+
+
+body{
+  background-color: $bcgColor;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include flexcenter(column);
+
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  color: var(--textColor);
+
+  font-family: "pixelify-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a{
+  cursor: pointer;
+  text-decoration: none;
+}
+
+*{
+  font-family: "pixelify-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+p{
+  margin: 0;
+}
+
+h1{
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+}
+
+.sign{
+  @include flexcenter(column);
+  width: 20rem;
+
+  &-inputs{
+     width: 100%;
+     @include flexcenter(column);
+     label{
+       visibility: hidden;
+     }
+
+     input{
+       width: 100%;
+       outline: none;
+       border-right: 1px solid rgba(255, 255, 255, 0);
+       border-top: 1px solid rgba(255, 255, 255, 0);
+       border-left: 1px solid rgba(255, 255, 255, 0);
+       border-bottom: 1px solid white;
+       //background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.12));
+       padding: 1rem;
+       box-sizing: border-box;
+       color: var(--textColor);
+       background: none;
+       &::placeholder{
+         color: var(--unselectedColor);
+       }
+       &:focus{
+         border: 1px solid white;
+         box-shadow: var(--unselectedColor) 0 0 30px;
+       }
+
+       &.error{
+         border-color: $errorColor;
+         &:focus{
+           box-shadow:  rgba(255, 89, 94, 0.47) 0 0 30px;
+         }
+
+       }
+     }
+   }
+
+  &-buttons{
+    @include flex(row, space-between, center, 0);
+    gap: 1rem;
+    width: 100%;
+    height: 50%;
+
+    button{
+      position: relative;
+      border-radius: 50px;
+      width: 3rem;
+      height: 2rem;
+      background-color: rgba(255, 255, 255, 0);
+      color: var(--textColor);
+      border: 1px solid white;
+      cursor: pointer;
+      overflow: hidden;
+      transition: 500ms;
+
+      span{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:after{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(0%, -50%);
+        transition: 500ms;
+        content: "continue";
+        opacity: 0;
+      }
+
+      &:hover{
+        width: 6rem;
+
+        span{
+          transition: 500ms;
+          left: -10%;
+        }
+
+        &:after{
+          transform: translate(-50%, -50%);
+          opacity: 1;
+        }
+      }
+      &:active{
+        transform: scale(.8);
+      }
+    }
+
+    a{
+      color: var(--textColor);
+      position: relative;
+      &:hover{
+        transform: scale(1.1);
+        &:after{
+          width: 40%;
+        }
+      }
+      &:active{
+        transform: scale(1);
+      }
+      &:after {
+        transition: 300ms;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        content: "";
+        background-color: var(--textColor);
+        height: 1px;
+        width: 0;
+        border-radius: 5px;
+      }
+    }
+  }
+
+  .error-message{
+    color: $errorColor;
+    margin-bottom: 1rem;
+  }
+}
+
+*{
+  transition: 300ms;
+}
+
+
+.absolute-background{
+  position: absolute;
+  z-index: -100;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  opacity: .4;
+  .relative-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    flex-wrap: wrap;
+    position: relative;
+    div{
+      width: calc(100vw/7);
+      height: calc(100vh/4);
+      //border: 1px solid rgba(255, 255, 255, 0.03);
+      box-sizing: border-box;
+    }
+  }
+  .absolute-blur{
+    border: none;
+    background: rgba(255, 255, 255, 0.19);
+    filter: blur(10rem);
+    opacity: .8;
+    &.ab-1{
+      height: 30rem;
+      width: 30rem;
+      background: rgba(255, 255, 255, 0.17);
+      position: absolute;
+      top: -20%;
+      left: -20%;
+    }
+
+    &.ab-2{
+      height: 60rem;
+      width: 60rem;
+      transform: rotate(45deg);
+      background: rgba(255, 255, 255, 0.12);
+      position: absolute;
+      bottom: -50%;
+      right: -50%;
+    }
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translate(0%, 100%);
+
+  }
+
+  to {
+    transform: translate(0%, 0%);
+  }
+}
+
+#cookies{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: 300ms;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15.6px);
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 15px;
+
+  animation: slide-up 500ms ;
+
+  height: fit-content;
+  width: 100vw;
+  padding: 2rem;
+  z-index: 10000000;
+  @include flex(column, center, center, 2rem);
+
+  .highlight{
+    background: $highlightColor;
+    color: black;
+  }
+
+  h2, p{
+    margin: 0;
+  }
+
+  & > div{
+    width: 100%;
+    @include flex(row, center, flex-start, 2rem);
+
+    div:nth-child(1){
+      @include flex(column, center, center, 1rem);
+      width: 40%;
+      p{
+        width: 100%;
+        text-align: justify;
+      }
+      & > span{
+        width: 100%;
+        @include flex(row, flex-end, center, 2rem);
+        button{
+          cursor: pointer;
+        }
+      }
+    }
+
+  }
+
+  .img{
+    aspect-ratio: 1/1;
+    width: 8rem;
+    position: relative;
+    background: url("../imgs/Screenshot_2025-11-16_at_15.05.43.png") -.5rem;
+    background-size: cover;
+
+    cursor: pointer;
+
+    &:hover{
+      &::after{
+        opacity: 0;
+      }
+    }
+
+    &::after{
+      transition: 300ms;
+      content:"spoiler";
+      @include flexcenter(row);
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.42);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(15.6px);
+    }
+  }
+
+
+
+
+
+}

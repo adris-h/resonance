@@ -1,0 +1,56 @@
+@import "../scss-tools/variables";
+@import "../scss-tools/mixins";
+@import '../scss-tools/nav';
+
+
+body{
+  background: $bcgColor;
+  color: $textColor;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  @include flex(row, flex-end, center, 0);
+  overflow: hidden;
+  position: relative;
+
+  font-family: "interpol-correspondence", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+#main-chat-window{
+  width: calc(100vw - $nav-width);
+  height: 100%;
+  border: 1px red solid;
+
+  @include flexcenter(row-reverse)
+}
+
+#chat-window{
+  width: 80%;
+  @include flexcenter(column);
+  div{
+    height: 60%;
+    width: 100%;
+  }
+  textarea{
+    resize: none;
+    background: transparent;
+    color: white;
+    width: 60%;
+    border: rgba(255, 255, 255, 0.1) solid 1px;
+    outline: none;
+    padding: 1rem;
+    border-radius: 15px;
+    &:focus{
+      border: rgba(255, 255, 255, 0.21) solid 1px;
+    }
+  }
+}
+
+#chat-list{
+  width: 20%;
+  height: 100%;
+  border: 1px red solid;
+}

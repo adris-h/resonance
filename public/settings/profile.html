@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../main-styles/settingsPage.css">
+    <link rel="stylesheet" href="https://use.typekit.net/dhk5kym.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script async defer src="../javascript/currentPage.js"></script>
+    <script  defer src="../javascript/main.js" type="module"></script>
+    <script  defer src="../javascript/userProfile.js" type="module"></script>
+</head>
+<body>
+<nav>
+    <a href="../main.html"> < to main</a>
+</nav>
+<main id="main-content">
+
+    <div class="settings-nav">
+        <h2>Settings</h2>
+        <a class="profile-link">
+            <span>profile</span>
+        </a>
+        <a href="account.html" class="account-link">
+            <span>account</span>
+        </a>
+        <a href="theme.html" class="theme-link">
+            <span>themes</span>
+        </a>
+        <a href="keybinds.html" class="key-link">
+            <span>keybinds</span>
+        </a>
+        <h2>More Info</h2>
+        <a href="about-creator.html" class="creator-link">
+            <span>about creator</span>
+        </a>
+        <a href="about-project.html" class="project-link">
+            <span>about project</span>
+        </a>
+    </div>
+    <div class="settings-container" id="profile-container">
+        <div class="settings-container_wrapper">
+            <h1>Profile Settings</h1>
+            <div class="edit-profile">
+                <div class="username-input">
+                    <h2>Username</h2>
+                    <input type="text" name="username" id="edit-username">
+                </div>
+                <div class="bio-input">
+                    <h2>Bio</h2>
+                    <textarea  maxlength="120" id="bioInput"></textarea>
+                </div>
+                <button id="submit-username" class="outer">
+                    <span class="inner">
+                        <i class="inner-text">submit</i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "ygg001": {
+    "name": "Yggdrasil",
+    "artist": "Asphinal",
+    "cover": "imgs/song-covers/yggdrasil-cover.webp",
+    "src": "audios/yggdrasil.mp3",
+    "bpm": "180"
+  },
+  "dow001": {
+    "name": "Downfall",
+    "artist": "Asphinal",
+    "cover": "imgs/song-covers/downfall-cover.webp",
+    "src": "audios/downfall.mp3",
+    "bpm": "83"
+  },
+  "whi001": {
+    "name": "White Cat",
+    "artist": "Yves",
+    "cover": "imgs/song-covers/white-cat-cover.webp",
+    "src": "audios/white-cat.mp3",
+    "bpm": "116"
+  },
+
+  "asp001": {
+    "name": "Asphinal",
+    "artist": "Asphinal",
+    "cover": "imgs/song-covers/asphinal-cover.webp",
+    "src": "audios/asphinal.mp3",
+    "bpm": "180"
+  },
+  "mor001": {
+    "name": "Morning",
+    "artist": "Asphinal",
+    "cover": "imgs/song-covers/downfall-album-cover.webp",
+    "src": "audios/morning.mp3",
+    "bpm": "157"
+  },
+  "now001": {
+    "name": "Now I Sit In Melancholy",
+    "artist": "Asphinal",
+    "cover": "imgs/song-covers/nowisit-cover.webp",
+    "src": "audios/nowisit.mp3",
+    "bpm": "135"
+  },
+  "tre001": {
+    "name": "Treeturn",
+    "artist": "Asphinal",
+    "cover": "imgs/song-covers/downfall-album-cover.webp",
+    "src": "audios/treeturn.mp3",
+    "bpm": "155"
+  },
+  "ife001": {
+    "name": "I Felt Your Hands",
+    "artist": "Asphinal",
+    "cover": "imgs/song-covers/ifelt-cover.webp",
+    "src": "audios/ifelt.mp3",
+    "bpm": "146"
+  }
+}

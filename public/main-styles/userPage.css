@@ -1,0 +1,544 @@
+:root {
+  --mainColor: #393053;
+  --textColor: #dedede;
+  --errorColor: #ff595e;
+  --bcgColor: #0c0c0f;
+  --navColor: #050506;
+  --highlightColor: #66d1ff;
+  --accentColor: #06b7fd;
+  --accentColorDarker: #0269b8;
+  --unselectedColor: #4b4b4c;
+  --seekerColor: rgba(255, 255, 255, 0.07);
+  --borderRadius: 15px;
+  --transition: 0.3s;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+::selection {
+  color: black;
+  background: var(--highlightColor);
+}
+
+button {
+  font-size: 0.8rem;
+}
+
+@font-face {
+  font-family: atelier;
+  src: url(../fonts/atelier.otf);
+}
+@media only screen and (max-width: 1749px) and (min-width: 1400px) {
+  :root {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 2800px) and (min-width: 1740px) {
+  :root {
+    font-size: 25px;
+  }
+}
+/*
+
+nav{
+  border-right: rgba(160, 160, 160, 0.17) solid 1px;
+  width: $nav-width;
+  height: 100%;
+  position: fixed;
+  background: $navColor;
+  left: 0;
+  color: $textColor;
+  @include flex(column, flex-start, center, 0);
+  transition: 300ms;
+  box-sizing: border-box;
+
+
+
+  &.second{
+    width: calc($nav-width + 10vw);
+  }
+
+  .app-logo{
+    aspect-ratio: 1/1;
+    width: 2rem;
+    background-color: white;
+    border-radius: 50%;
+    margin: 1rem;
+  }
+  .nav-buttons{
+    @include flex(column, center, center, 1rem);
+    a{
+      cursor: pointer;
+      color: white;
+      width: 2.5rem;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
+      @include flexcenter(row);
+      svg{
+        width: 1.1rem;
+        height: 1.1rem;
+        fill: white;
+      }
+      span{
+        visibility: hidden;
+      }
+      &:hover{
+        background-color: rgba(0, 0, 0, 0.47);
+
+      }
+
+    }
+  }
+}
+
+*/
+.user-profile {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.1rem;
+  z-index: 1000;
+}
+.user-profile > a {
+  aspect-ratio: 1/1;
+  width: 2rem;
+  background-color: white;
+  border-radius: 50%;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user-profile > a span {
+  text-transform: uppercase;
+}
+.user-profile_menu {
+  background: linear-gradient(to top, rgb(11, 11, 11), rgb(15, 15, 15));
+  border-radius: 10px;
+  box-shadow: inset 5px -5px 0 rgba(28, 28, 28, 0.19);
+  box-shadow: inset -5px 5px 0 rgba(57, 57, 57, 0.21);
+  box-shadow: 0 0 120px rgba(74, 74, 74, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  padding: 0.5rem 0.5rem;
+  width: 15rem;
+  height: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: 400ms ease-in-out;
+}
+.user-profile_menu a {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 2rem;
+  border-radius: 10px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  transition: 400ms;
+}
+.user-profile_menu a:hover {
+  color: var(--highlightColor);
+  transform: translateY(-0.2rem);
+}
+.user-profile_menu.active {
+  visibility: visible;
+  height: 10rem;
+  opacity: 1;
+  z-index: 1000;
+}
+.user-profile_menu a.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  z-index: 1000;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+}
+nav a:hover {
+  color: var(--highlightColor);
+}
+
+body {
+  background: var(--bcgColor);
+  color: var(--textColor);
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0;
+  position: relative;
+}
+
+* {
+  font-family: "pixelify-sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0;
+  height: fit-content;
+  padding-top: 10vw;
+}
+section #user-search {
+  height: 2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  top: 0;
+  font-size: 1.5vw;
+}
+section #user-search #user-search-result {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: 20%;
+  padding: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  background: linear-gradient(to top, rgb(11, 11, 11), rgb(15, 15, 15));
+  box-shadow: 0 0 10px rgba(74, 74, 74, 0);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  transition: 300ms;
+}
+section #user-search #user-search-result:hover {
+  background: linear-gradient(to top, rgba(11, 11, 11, 0.8), rgba(15, 15, 15, 0.8));
+  box-shadow: 0 0 20px rgba(74, 74, 74, 0.4);
+}
+section #user-search #user-search-result.active {
+  opacity: 1;
+  visibility: visible;
+}
+section #user-search #user-search-result #user-search-avatar {
+  width: 2rem;
+  aspect-ratio: 1/1;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
+  color: black;
+  font-size: 1.5vw;
+  text-transform: uppercase;
+  border-radius: var(--borderRadius);
+}
+section #user-search #user-search-input {
+  color: white;
+  background-color: transparent;
+  border: none;
+  border-bottom: white solid 1px;
+  width: 20%;
+}
+section #user-search #user-search-input:focus {
+  outline: none;
+  border-color: var(--highlightColor);
+}
+section #user-search #user-search-input.error {
+  border-color: var(--errorColor);
+}
+section #post-buttons {
+  width: 65%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+section #post-buttons button {
+  width: 50%;
+  cursor: pointer;
+  padding: 0.3rem 1rem;
+}
+section #profile-posts {
+  padding-top: 1vw;
+  height: fit-content;
+  width: 65%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+section #profile-posts .preset {
+  width: 20vw;
+  aspect-ratio: 4/3;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: 300ms;
+}
+section #profile-posts .preset:hover {
+  box-shadow: 0 0 20px rgba(109, 109, 109, 0.12);
+}
+section #profile-posts .preset .preset-showcase {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5vw;
+  padding-top: 2vw;
+}
+section #profile-posts .preset .preset-showcase > span {
+  height: 60%;
+  width: 0.2vw;
+  background: #1f1f1f;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0;
+}
+section #profile-posts .preset .preset-showcase > span span {
+  height: 4%;
+  width: 100%;
+  background: var(--highlightColor);
+}
+section #profile-posts .preset .preset-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1.5vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+}
+section #profile-posts .preset .preset-name span:nth-child(2) {
+  font-size: 1.5rem;
+}
+section #profile-posts .preset .preset-name span:nth-child(2) .preset-settings {
+  position: absolute;
+  right: 2rem;
+  width: fit-content1rem;
+  height: 5vw;
+  bottom: 0;
+  background: var(--bcgColor);
+  opacity: 0;
+  visibility: hidden;
+  transition: 300ms;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 0 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0;
+}
+section #profile-posts .preset .preset-name span:nth-child(2) .preset-settings a {
+  font-size: 1rem;
+  transition: 300ms;
+}
+section #profile-posts .preset .preset-name span:nth-child(2) .preset-settings .delete-preset-button:hover {
+  color: red;
+}
+section #profile-posts .preset .preset-name span:nth-child(2) .preset-settings .edit-preset-button:hover, section #profile-posts .preset .preset-name span:nth-child(2) .preset-settings .like-preset-button:hover, section #profile-posts .preset .preset-name span:nth-child(2) .preset-settings .save-preset-button:hover {
+  color: var(--highlightColor);
+}
+section #profile-posts .preset .preset-name span:nth-child(2):hover .preset-settings {
+  opacity: 1;
+  visibility: visible;
+}
+section #user-container {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+section #user-container #user-avatar {
+  width: 10vw;
+  aspect-ratio: 1/1;
+  background: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
+  color: black;
+  font-size: 3vw;
+  text-transform: uppercase;
+  border-radius: var(--borderRadius);
+}
+section #user-container #profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+}
+section #user-container #profile-info #profile-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+}
+section #user-container #profile-info #profile-header h1 {
+  margin: 0;
+  text-align: left;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+  font-size: 3vw;
+}
+section #user-container #profile-info #profile-header #profile-id {
+  cursor: pointer;
+  margin: 0;
+  color: var(--unselectedColor);
+  font-size: 1.5vw;
+}
+section #user-container #profile-info #profile-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+section #user-container #profile-info #profile-buttons a {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--textColor);
+  transition: 300ms;
+}
+section #user-container #profile-info #profile-buttons a:hover {
+  opacity: 0.7;
+}
+section #user-container #profile-info #profile-bio {
+  font-size: 1.5vw;
+  margin: 0.5em 0 0.5em 0;
+  color: var(--unselectedColor);
+  text-align: left;
+}
+section #delete-preset-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  background: rgba(0, 0, 0, 0.14);
+  box-shadow: 0 4px 30px rgba(150, 150, 150, 0.1);
+  backdrop-filter: blur(15.6px);
+  border: 1px solid rgba(123, 123, 123, 0.16);
+  border-radius: 15px;
+  width: 20vw;
+  height: 20vh;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 300ms;
+}
+section #delete-preset-container.active {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+section #delete-preset-container button {
+  cursor: pointer;
+}
+
+.user-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.user-wrapper h1 {
+  margin: 0;
+  font-family: atelier;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
+}
+.user-wrapper #continue-button {
+  border: 1px solid white;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.user-wrapper p {
+  width: 40%;
+  text-align: center;
+  margin: 0;
+}
+
+/*# sourceMappingURL=userPage.css.map */
