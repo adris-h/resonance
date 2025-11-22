@@ -30,7 +30,7 @@ const firebaseConfig = {
 const signInPage = "index.html";
 const userPage = "user.html";
 let currentPage = window.location.pathname
-const mainPage = "main.html";
+const mainPage = "public/main.html";
 
 function relocateToUserPage(){
     window.location.href = mainPage;
