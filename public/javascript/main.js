@@ -101,12 +101,12 @@ function signUp(){
                     displayName: user.displayName,
                     bio: ""
                 });
-            }).then( () => {
+            })/*.then( () => {
                 setDoc(doc(db, "users", user.uid, "followers"), {});
                 setDoc(doc(db, "users", user.uid, "following"), {});
                 setDoc(doc(db, "users", user.uid, "presets"), {});
                 setDoc(doc(db, "users", user.uid, "likes"), {});
-            }).then(() => {
+            })*/.then(() => {
                 console.log("User signed up:", user.uid, "Username:", user.displayName);
                 relocateToUserPage();
             });

@@ -9,10 +9,13 @@ onAuthStateChanged(auth, async (user) => {
         const presets = await getDocs(collection(db, "users", user.uid, "presets"));
 
         showPresets("user", presets, profilePosts);
-
         setupDeleteButtons();
     }
 });
+
+
+
+
 
 let currentPreset;
 const deletePresetContainer = document.querySelector("#delete-preset-container");

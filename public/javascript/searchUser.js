@@ -33,11 +33,23 @@ searchInput.addEventListener("input", async () => {
             console.log(preset.id, preset.data());
         })
 
+        let isFollowed = false;
+
+        const user = auth.currentUser;
+
+        const followingDocs = await getDocs(collection(db, "users", user.uid, "following"));
+        followingDocs.forEach((doc) => {
+            if (doc.id === searchUserId) {
+                isFollowed = true;
+            }
+        })
+
         searchResult.onclick = () => {
             localStorage.setItem('searchedUser', JSON.stringify({
                 name: username,
                 bio: userDoc.data().userBio || "",
                 id: searchUserId,
+                followed: isFollowed,
             }));
             location.href = './searchedUser.html?userId=' + searchUserId;
             console.log(searchUserId);

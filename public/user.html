@@ -11,6 +11,7 @@
     <script defer src="javascript/profilePresets.js" type="module"></script>
     <script defer src="javascript/getInfo.js" type="module"></script>
     <script defer src="javascript/searchUser.js" type="module"></script>
+    <script defer src="javascript/userFollowings.js" type="module"></script>
   </head>
   <body>
   <nav>
@@ -35,13 +36,13 @@
             <p id="profile-bio">This is users bio</p>
             <div id="profile-buttons">
               <a href="settings/profile.html">edit profile</a>
-              <a href="">following</a>
+              <a id="following-button">following</a>
             </div>
           </div>
       </div>
       <!--<div id="post-buttons">
         <button>your presets</button>
-        <button>favourited</button>
+        <button>likes</button>
       </div>-->
       <div id="profile-posts"></div>
       <div id="delete-preset-container">
@@ -51,6 +52,8 @@
           <button id="cancel-delete">No</button>
         </span>
       </div>
+
+
     </section>
     <div class="user-profile">
       <a class="menu_button"><span class="unselectable user-profile-picture">u</span></a>
@@ -61,6 +64,14 @@
         <a href="../index.html" id="sign-out-button">Sign Out</a>
       </menu>
     </div>
+      <div id="following-container">
+          <div id="sort-container">
+              <a id="filter">a-z</a>
+              <a id="sort-select">asc</a>
+          </div>
+          <div id="following-list">
+          </div>
+      </div>
 
   </body>
 </html>
