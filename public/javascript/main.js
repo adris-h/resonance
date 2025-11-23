@@ -8,7 +8,7 @@ import {
     signOut,
     updateProfile
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-import { getFirestore, getDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+import { getFirestore, getDoc, setDoc, doc, collection } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
 
@@ -84,9 +84,6 @@ continueButtons.forEach((button) => {
 }*/
 localStorage.setItem("cookies", "true");
 
-
-
-
 function signUp(){
     // CREATE NEW USER
     const email = emailInput.value;
@@ -104,6 +101,11 @@ function signUp(){
                     displayName: user.displayName,
                     bio: ""
                 });
+            }).then( () => {
+                setDoc(doc(db, "users", user.uid, "followers"));
+                setDoc(doc(db, "users", user.uid, "following"));
+                setDoc(doc(db, "users", user.uid, "presets"));
+                setDoc(doc(db, "users", user.uid, "likes"));
             }).then(() => {
                 console.log("User signed up:", user.uid, "Username:", user.displayName);
                 relocateToUserPage();
@@ -115,6 +117,7 @@ function signUp(){
             console.error("Sign up error:", errorCode, errorMessage);
             displayError(errorCode);
         });
+
 
 }
 

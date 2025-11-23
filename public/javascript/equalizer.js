@@ -476,9 +476,9 @@ saveEQ.addEventListener('click', () => {
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        const presetsSnapshot = await getDocs(collection(db, "users", user.uid, "presets"));
+        const userPresets = await getDocs(collection(db, "users", user.uid, "presets"));
 
-        presetsSnapshot.forEach((docSnap) => {
+        userPresets.forEach((docSnap) => {
             const presetName = docSnap.id;
             const presetData = docSnap.data();
 
