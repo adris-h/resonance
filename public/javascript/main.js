@@ -102,10 +102,10 @@ function signUp(){
                     bio: ""
                 });
             }).then( () => {
-                setDoc(doc(db, "users", user.uid, "followers"));
-                setDoc(doc(db, "users", user.uid, "following"));
-                setDoc(doc(db, "users", user.uid, "presets"));
-                setDoc(doc(db, "users", user.uid, "likes"));
+                setDoc(doc(db, "users", user.uid, "followers"), {});
+                setDoc(doc(db, "users", user.uid, "following"), {});
+                setDoc(doc(db, "users", user.uid, "presets"), {});
+                setDoc(doc(db, "users", user.uid, "likes"), {});
             }).then(() => {
                 console.log("User signed up:", user.uid, "Username:", user.displayName);
                 relocateToUserPage();
