@@ -4,6 +4,7 @@ export function showPresets(user, presets, profilePosts){
     profilePosts.innerHTML = '';
 
     presets.forEach((preset) => {
+        console.log(preset.id);
         const presetName = preset.id;
         const presetData = preset.data();
         userPresets[presetName] = user === "likes" ? presetData.presetData : presetData;
@@ -19,11 +20,9 @@ export function showPresets(user, presets, profilePosts){
             spans += `<span><span class="slider-value" style="height: ${calculatedHeight}%"></span></span>`;
         });
 
-        console.log(userPresets);
-
         if(user === "searchedUser"){
             if (profilePosts.lastElementChild) {
-                document.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
+                profilePosts.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
                     `<div class="preset" id="${presetName}">
                         <div class="preset-showcase">
                             ${spans}
@@ -58,7 +57,7 @@ export function showPresets(user, presets, profilePosts){
             }
         } else if (user === "user"){
             if (profilePosts.lastElementChild) {
-                document.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
+                profilePosts.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
                     `<div class="preset" id="${presetName}">
                         <div class="preset-showcase">
                             ${spans}
@@ -91,15 +90,16 @@ export function showPresets(user, presets, profilePosts){
                         </div>
                     </div>`;
             }
-        } else {
+        } else if (user === "likes"){
+            console.log(`name ${presetData.presetName}`);
             if (profilePosts.lastElementChild) {
-                document.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
+                profilePosts.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
                     `<div class="preset" id="${presetName}">
                         <div class="preset-showcase">
                             ${spans}
                         </div>
                         <div class="preset-name">
-                            <span>${presetName}</span>
+                            <span>${presetData.presetName}</span>
                             <span>
                                 <span class="preset-settings">
                                     <a class="dislike-button"><i></i> dislike </a>
@@ -115,7 +115,7 @@ export function showPresets(user, presets, profilePosts){
                             ${spans}
                         </div>
                         <div class="preset-name">
-                            <span>${presetName}</span>
+                            <span>${presetData.presetName}</span>
                             <span>
                                 <span class="preset-settings">
                                     <a class="dislike-button"><i></i> dislike </a>

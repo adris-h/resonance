@@ -106,17 +106,15 @@ function unfollowUser() {
 const likeButtons = document.querySelectorAll(".like-preset-button");
 likeButtons.forEach(button => {
     button.addEventListener("click", async () => {
+
         let currentPreset = button.closest(".preset");
-        likePreset(currentPreset)
+        await likePreset(currentPreset)
     })
 });
 
-
-
-function likePreset(currentPreset) {
+async function likePreset(currentPreset) {
     console.log("Liked preset: " + currentPreset.id);
-
-    setDoc(doc(db, "users", user.uid, "likes", currentPreset.id), {
+    await setDoc(doc(db, "users", user.uid, "likes", `${userId}_${currentPreset.id}`), {
         presetData: userPresets[currentPreset.id],
         presetName: searchedUserCached.name + " - " +  currentPreset.id,
         likedAt: new Date(),
@@ -124,10 +122,5 @@ function likePreset(currentPreset) {
     });
 }
 
-function unlikePreset(currentPreset) {
-    console.log("Unliked preset: " + currentPreset.id);
-
-    deleteDoc(doc(db, "users", user.uid, "likes", currentPreset.id));
-}
 
 

@@ -12,18 +12,36 @@ const presetsButton = document.querySelector("#posts-button");
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const presets = await getDocs(collection(db, "users", user.uid, "presets"));
-        const likedPresets = await getDocs(collection(db, "users", user.uid, "likes"));
+        //const likedPresets = await getDocs(collection(db, "users", user.uid, "likes"));
 
         showPresets("user", presets, profilePosts);
 
+
         if(likesButton && presetsButton){
-            likesButton.addEventListener("click", () => {
+            likesButton.addEventListener("click", async () => {
+                const likedPresets = await getDocs(collection(db, "users", user.uid, "likes"));
+                console.log(likedPresets.size)
                 profilePosts.classList.remove("active");
                 profileLikes.classList.add("active");
                 likesButton.classList.add("active");
                 presetsButton.classList.remove("active");
 
                 showPresets("likes", likedPresets, profileLikes);
+
+                const dislikeButton = document.querySelectorAll(".dislike-button");
+                dislikeButton.forEach(button => {
+                    button.addEventListener("click", async () => {
+                        let currentPreset = button.closest(".preset");
+                        dislikePreset(currentPreset)
+                        console.log("dislike clicked");
+                    })
+                });
+
+                function dislikePreset(currentPreset) {
+                    console.log("Unliked preset: " + currentPreset.id);
+
+                    deleteDoc(doc(db, "users", user.uid, "likes", currentPreset.id));
+                }
             })
 
             presetsButton.addEventListener("click", () => {
@@ -35,6 +53,11 @@ onAuthStateChanged(auth, async (user) => {
                 showPresets("user", presets, profilePosts);
 
             })
+
+
+
+
+
         }
 
         setupDeleteButtons();
@@ -82,4 +105,5 @@ async function deletePreset(presetName) {
         location.reload();
     }
 }
+
 
