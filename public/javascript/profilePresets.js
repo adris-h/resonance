@@ -3,15 +3,46 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.2.1/fi
 import {showPresets} from "./showPreset.js";
 
 const profilePosts = document.querySelector("#profile-posts");
+const profileLikes = document.querySelector("#profile-likes");
+
+const likesButton = document.querySelector("#likes-button");
+const presetsButton = document.querySelector("#posts-button");
+
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         const presets = await getDocs(collection(db, "users", user.uid, "presets"));
+        const likedPresets = await getDocs(collection(db, "users", user.uid, "likes"));
 
         showPresets("user", presets, profilePosts);
+
+        if(likesButton && presetsButton){
+            likesButton.addEventListener("click", () => {
+                profilePosts.classList.remove("active");
+                profileLikes.classList.add("active");
+                likesButton.classList.add("active");
+                presetsButton.classList.remove("active");
+
+                showPresets("likes", likedPresets, profileLikes);
+            })
+
+            presetsButton.addEventListener("click", () => {
+                profileLikes.classList.remove("active");
+                profilePosts.classList.add("active");
+                presetsButton.classList.add("active");
+                likesButton.classList.remove("active");
+
+                showPresets("user", presets, profilePosts);
+
+            })
+        }
+
         setupDeleteButtons();
     }
 });
+
+
+
 
 
 

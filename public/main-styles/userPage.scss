@@ -112,6 +112,17 @@ section{
   #post-buttons{
     width: 65%;
     @include flexcenter(row);
+    @include button;
+
+    #posts-button, #posts-button .inner{
+        border-top-left-radius: var(--borderRadius);
+        border-bottom-left-radius: var(--borderRadius);
+    }
+    #like-button, #like-button .inner{
+        border-top-right-radius: var(--borderRadius);
+        border-bottom-right-radius: var(--borderRadius);
+    }
+
     button{
       width: 50%;
       cursor: pointer;
@@ -119,12 +130,19 @@ section{
     }
   }
 
-  #profile-posts{
+  #profile-posts, #profile-likes{
     padding-top: 1vw;
     height: fit-content;
     width: 65%;
-    @include flex(row, flex-start, flex-start, 1rem);
+
     flex-wrap: wrap;
+    visibility: hidden;
+    display: none;
+
+    &.active{
+      visibility: visible;
+      @include flex(row, flex-start, flex-start, 1rem);
+    }
 
     .preset{
       width: 20vw;
@@ -363,6 +381,7 @@ section{
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 15px;
   padding-top: 1rem;
+  z-index: 10000000;
 
   height: 70vh;
   width: 30vw;

@@ -1,10 +1,12 @@
-
 export function showPresets(user, presets, profilePosts){
+    console.log("done: ", user, presets, profilePosts);
     let userPresets = {};
+    profilePosts.innerHTML = '';
+
     presets.forEach((preset) => {
         const presetName = preset.id;
         const presetData = preset.data();
-        userPresets[presetName] = presetData;
+        userPresets[presetName] = user === "likes" ? presetData.presetData : presetData;
 
         let calculatedHeight;
         let min = -12;
@@ -52,7 +54,7 @@ export function showPresets(user, presets, profilePosts){
                         </div>
                     </div>`;
             }
-        } else {
+        } else if (user === "user"){
             if (profilePosts.lastElementChild) {
                 document.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
                     `<div class="preset" id="${presetName}">
@@ -82,6 +84,39 @@ export function showPresets(user, presets, profilePosts){
                                 <span class="preset-settings">
                                     <a class="delete-preset-button"><i></i> delete </a>
                                     <a class="edit-preset-button">edit</a>
+                                </span>
+                            :</span>
+                        </div>
+                    </div>`;
+            }
+        } else {
+            if (profilePosts.lastElementChild) {
+                document.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',
+                    `<div class="preset" id="${presetName}">
+                        <div class="preset-showcase">
+                            ${spans}
+                        </div>
+                        <div class="preset-name">
+                            <span>${presetName}</span>
+                            <span>
+                                <span class="preset-settings">
+                                    <a class="dislike-button"><i></i> dislike </a>
+                                </span>
+                            :</span>
+                        </div>
+                    </div>`
+                );
+            } else {
+                profilePosts.innerHTML +=
+                    `<div class="preset" id="${presetName}">
+                        <div class="preset-showcase">
+                            ${spans}
+                        </div>
+                        <div class="preset-name">
+                            <span>${presetName}</span>
+                            <span>
+                                <span class="preset-settings">
+                                    <a class="dislike-button"><i></i> dislike </a>
                                 </span>
                             :</span>
                         </div>
