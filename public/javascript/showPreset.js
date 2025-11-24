@@ -19,6 +19,8 @@ export function showPresets(user, presets, profilePosts){
             spans += `<span><span class="slider-value" style="height: ${calculatedHeight}%"></span></span>`;
         });
 
+        console.log(userPresets);
+
         if(user === "searchedUser"){
             if (profilePosts.lastElementChild) {
                 document.querySelector(".preset:nth-child(1)").insertAdjacentHTML('beforebegin',

@@ -33,8 +33,6 @@ if (searchedUserCached && searchedUserCached.id === userId) {
     }
 }
 
-
-
 const presets = await getDocs(collection(db, "users", userId, "presets"));
 showPresets("searchedUser", presets, profilePosts);
 

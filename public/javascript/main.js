@@ -30,7 +30,6 @@ const firebaseConfig = {
 const signInPage = "index.html";
 const userPage = "user.html";
 let currentPage = window.location.pathname
-const mainPage = "public/main.html";
 
 function relocateToUserPage(){
     window.location.href = mainPage;
@@ -41,7 +40,7 @@ function relocateToSignInPage(){
     window.location.href = signInPage;
 }
 
-function relocateToMainPage(){
+function relocateToMainPage(mainPage){
     window.location.href = mainPage;
 }
 
@@ -101,14 +100,9 @@ function signUp(){
                     displayName: user.displayName,
                     bio: ""
                 });
-            })/*.then( () => {
-                setDoc(doc(db, "users", user.uid, "followers"), {});
-                setDoc(doc(db, "users", user.uid, "following"), {});
-                setDoc(doc(db, "users", user.uid, "presets"), {});
-                setDoc(doc(db, "users", user.uid, "likes"), {});
-            })*/.then(() => {
+            }).then(() => {
                 console.log("User signed up:", user.uid, "Username:", user.displayName);
-                relocateToUserPage();
+                relocateToMainPage("main.html");
             });
         })
         .catch((error) => {
@@ -130,7 +124,7 @@ function signIn(){
             // ----------- user signed in
             const user = userCredential.user;
             console.log("User signed in:", user.uid);
-            relocateToUserPage();
+            relocateToMainPage("public/main.html");
         })
         .catch((error) => {
             const errorCode = error.code;
