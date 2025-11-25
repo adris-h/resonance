@@ -84,16 +84,18 @@
         @include flex(column, flex-start, flex-start, 0);
 
       }
-      @include button();
 
-      button{
-        margin-top: 1rem;
-        margin-right: 0;
-        border-radius: 10px;
-      }
     }
   }
 
+}
+
+@include button();
+
+button{
+  margin-top: 1rem;
+  margin-right: 0;
+  border-radius: 10px;
 }
 
 *{
@@ -194,4 +196,65 @@ input, textarea{
   button{
     cursor: pointer;
   }
+}
+.color-input{
+  span{
+    @include flexcenter(row);
+    gap: 1rem;
+  }
+}
+
+#color-cell{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 100%;
+
+  width: 2rem;
+  height: 2rem;
+}
+
+
+.dark{
+  color: $unselectedColor;
+}
+
+#theme-options{
+  @include flex(row, flex-start, center, 2rem);
+
+  h2{
+    font-size: 1rem;
+
+  }
+
+  div{
+    @include flexcenter(column);
+    & > span{
+      @include flexcenter(row);
+      gap: 1rem;
+      .color-cell{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 100%;
+
+        width: 2rem;
+        height: 2rem;
+      }
+
+      #color-cell-1{
+        background: $highlightColor;
+      }
+
+      #color-cell-2{
+        background: $accentColor;
+      }
+    }
+  }
+}
+
+#button-holder{
+    @include flex(row, flex-start, center, 1rem);
 }

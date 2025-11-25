@@ -39,8 +39,8 @@ onAuthStateChanged(auth, async (user) => {
 
                 function dislikePreset(currentPreset) {
                     console.log("Unliked preset: " + currentPreset.id);
-
                     deleteDoc(doc(db, "users", user.uid, "likes", currentPreset.id));
+                    location.reload();
                 }
             })
 
@@ -53,22 +53,11 @@ onAuthStateChanged(auth, async (user) => {
                 showPresets("user", presets, profilePosts);
 
             })
-
-
-
-
-
         }
 
         setupDeleteButtons();
     }
 });
-
-
-
-
-
-
 
 
 let currentPreset;
@@ -79,12 +68,14 @@ const cancelDelete = document.querySelector("#cancel-delete");
 function setupDeleteButtons() {
     const deleteButtons = document.querySelectorAll(".delete-preset-button");
 
-    deleteButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            currentPreset = button.closest(".preset");
-            deletePresetContainer.classList.add("active");
+    if(deleteButtons){
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                currentPreset = button.closest(".preset");
+                deletePresetContainer.classList.add("active");
+            })
         })
-    })
+    }
 }
 
 if(cancelDelete && confirmDelete){

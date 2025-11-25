@@ -6,9 +6,14 @@
     <link rel="stylesheet" href="../main-styles/settingsPage.css">
     <link rel="stylesheet" href="https://use.typekit.net/dhk5kym.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <script async defer src="../javascript/currentPage.js"></script>
+    <script defer src="../javascript/currentPage.js"></script>
     <script  defer src="../javascript/main.js" type="module"></script>
     <script  defer src="../javascript/userProfile.js" type="module"></script>
+    <link href="colorpicker.min.css">
+    <script src="colorpicker.iife.min.js"></script>
+    <script defer src="../javascript/menuPopUp.js" type="module"></script>
+
+    <script defer src="../javascript/theme.js" type="module"></script>
 </head>
 <body>
 <nav>
@@ -50,6 +55,10 @@
                     <h2>Bio</h2>
                     <textarea  maxlength="120" id="bioInput"></textarea>
                 </div>
+                <div class="color-input">
+                    <h2>Profile Avatar Color</h2>
+                    <span><span id="color-cell"></span><span id="hex-code">#00000</span></span>
+                </div>
                 <button id="submit-username" class="outer">
                     <span class="inner">
                         <i class="inner-text">submit</i>
@@ -57,6 +66,15 @@
                 </button>
             </div>
         </div>
+    </div>
+    <div class="user-profile">
+        <a class="menu_button"><span id="user-profile" class="unselectable user-profile-picture">u</span></a>
+        <menu class=user-profile_menu>
+            <a href="../user.html">Your Profile</a>
+            <a href="keybinds.html"> Keybinds </a>
+            <a href="profile.html">Settings</a>
+            <a href="../../index.html" id="sign-out-button">Sign Out</a>
+        </menu>
     </div>
 </main>
 </body>

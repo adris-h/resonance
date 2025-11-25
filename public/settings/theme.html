@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="../main-styles/settingsPage.css">
       <link rel="stylesheet" href="https://use.typekit.net/dhk5kym.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-      <script async defer src="../javascript/currentPage.js"></script>
+      <script  defer src="../javascript/currentPage.js"></script>
+      <script defer src="../javascript/menuPopUp.js" type="module"></script>
+      <link href="colorpicker.min.css">
+      <script src="colorpicker.iife.min.js"></script>
+      <script defer src="../javascript/theme.js" type="module"></script>
   </head>
   <body>
   <nav>
@@ -40,7 +44,52 @@
       <div class="settings-container">
           <div class="settings-container_wrapper">
               <h1>Theme Settings</h1>
+              <p class="dark">Because of time disadvantage I managed to make the app customizable only by changing three colors. I hope you understand and don't think I'm completely useless :3 </p>
+              <div id="theme-options">
+                  <div>
+                      <h2 class="dark">Highlight Color</h2>
+                      <span>
+                          <span id="color-cell-1" class="color-cell"></span>
+                          <span id="hex-code-1">#66d1ff</span>
+                      </span>
+                  </div>
+                  <div>
+                      <h2 class="dark">Accent Color</h2>
+                      <span>
+                          <span id="color-cell-2" class="color-cell"></span>
+                          <span id="hex-code-2">#06b7fd</span>
+                      </span>
+                  </div>
+                  <div>
+                      <h2 class="dark">Accent Color but Darker</h2>
+                      <span>
+                          <span id="color-cell-3" class="color-cell"></span>
+                          <span id="hex-code-3">#0269b8</span>
+                      </span>
+                  </div>
+              </div>
           </div>
+         <span id="button-holder">
+              <button id="submit-theme" class="outer">
+                    <span class="inner">
+                        <i class="inner-text">submit</i>
+                    </span>
+              </button>
+              <button id="default-theme" class="outer">
+                        <span class="inner">
+                            <i class="inner-text">default</i>
+                        </span>
+              </button>
+         </span>
+      </div>
+      <div class="user-profile">
+          <a class="menu_button"><span id="user-profile" class="unselectable user-profile-picture">u</span></a>
+          <menu class=user-profile_menu>
+              <a href="../user.html">Your Profile</a>
+              <a href="keybinds.html"> Keybinds </a>
+              <a href="profile.html">Settings</a>
+              <a href="../../index.html" id="sign-out-button">Sign Out</a>
+          </menu>
       </div>
   </main>
   </body>

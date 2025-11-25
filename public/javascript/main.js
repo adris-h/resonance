@@ -54,33 +54,6 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
-/*
-const continueButtons = document.querySelectorAll(".continue-button");
-const cookiesWrapper = document.getElementById("cookies");
-
-const yesCookies = document.getElementById("yes-cookies");
-const noCookies = document.getElementById("no-cookies");
-continueButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        cookiesWrapper.style.visibility = "hidden";
-        cookiesWrapper.style.opacity = "0";
-
-        setTimeout(()=>{
-            cookiesWrapper.remove()
-        }, 400)
-    });
-})*/
-
-/*if(yesCookies && noCookies){
-    yesCookies.addEventListener("click", () => {
-        setCookie("cookies", "true")
-        localStorage.setItem("cookies", "true");
-    })
-
-    noCookies.addEventListener("click", () => {
-        localStorage.setItem("cookies", "false");
-    })
-}*/
 localStorage.setItem("cookies", "true");
 
 function signUp(){
@@ -270,3 +243,17 @@ function deleteCookie(cname) {
     document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
 }
 
+const r = document.querySelector(':root');
+
+let userColor = getCookie("color");
+onAuthStateChanged(auth, (user) => {
+    if (userColor) {
+        getDoc(doc(db, "users", user.uid))
+            .then(userDoc => {
+                if (userDoc.exists()) {
+                    userColor = userDoc.data().color;
+                }
+            })
+    }
+});
+r.style.setProperty('--profileColor', `${userColor}`);

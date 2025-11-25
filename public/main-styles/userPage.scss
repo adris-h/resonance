@@ -250,10 +250,10 @@ section{
     #user-avatar{
       width: 10vw;
       aspect-ratio: 1/1;
-      background: white;
+      background: $profileColor;
       @include flexcenter(row);
 
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 
       color: black;
       font-size: $headingSize;
@@ -313,6 +313,7 @@ section{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(.5);
+    z-index: 100000;
 
     background: rgba(0, 0, 0, 0.14);
     box-shadow: 0 4px 30px rgba(150, 150, 150, 0.1);
@@ -458,3 +459,4 @@ section{
     transform: translateY(0);
   }
 }
+

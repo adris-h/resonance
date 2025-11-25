@@ -63,13 +63,20 @@ function updateSliderBackground(slider) {
     const max = Number(slider.max);
     const value = Number(slider.value);
     const percent = (max - value) / (max - min) * 100;
+
+    const rootStyles = getComputedStyle(document.documentElement);
+    const accentColor = rootStyles.getPropertyValue('--accentColor').trim();
+    const highlightColor = rootStyles.getPropertyValue('--highlightColor').trim();
+    const accentColorDarker = rootStyles.getPropertyValue('--accentColorDarker').trim();
+    const unselectedColor = '#1c1c1c';
+
     slider.style.background = `linear-gradient(
-                to top,
-                #1c1c1c ${percent}%,
-                #06c0fd ${percent}%,
-                #0269b8,
-                #037ddb
-            )`;
+        to top,
+        ${unselectedColor} ${percent}%,
+        ${highlightColor} ${percent}%,
+        ${accentColor},
+        ${accentColorDarker} 100%
+    )`;
 }
 
 function initilzieEqualizer(trackName, containerId, audioSelector) {

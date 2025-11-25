@@ -5,6 +5,8 @@ $textColor: var(--textColor);
 $errorColor: var(--errorColor);
 $bcgColor: var(--bcgColor);
 $highlightColor: var(--highlightColor);
+$accentColor: var(--accentColor);
+
 $heading1: 3rem;
 $nav-width: 5%;
 $navColor: var(--navColor);
@@ -15,10 +17,14 @@ $headingSize: 3vw;
 $normalSize: 1.5vw;
 $smallSize: 1vw;
 
+$profileColor: var(--profileColor);
+
 :root{
   --mainColor: #393053;
   --textColor: #dedede;
   --errorColor: #ff595e;
+
+  --profileColor: white;
 
   --bcgColor: #0c0c0f;  // #141414 //#0f0f0f
   --navColor: #050506;
@@ -27,7 +33,7 @@ $smallSize: 1vw;
   --accentColor: #06b7fd;
   --accentColorDarker: #0269b8;
 
-  --unselectedColor: #4b4b4c;
+  --unselectedColor: #343436;
   --seekerColor: rgba(255, 255, 255, 0.07);
 
   --borderRadius: 15px;

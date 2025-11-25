@@ -2,12 +2,13 @@
   --mainColor: #393053;
   --textColor: #dedede;
   --errorColor: #ff595e;
+  --profileColor: white;
   --bcgColor: #0c0c0f;
   --navColor: #050506;
   --highlightColor: #66d1ff;
   --accentColor: #06b7fd;
   --accentColorDarker: #0269b8;
-  --unselectedColor: #4b4b4c;
+  --unselectedColor: #343436;
   --seekerColor: rgba(255, 255, 255, 0.07);
   --borderRadius: 15px;
   --transition: 0.3s;
