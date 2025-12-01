@@ -490,7 +490,7 @@ onAuthStateChanged(auth, async (user) => {
             const presetData = docSnap.data();
 
             userPresets[presetName] = presetData;
-            presets[presetName] = Object.values(presetData);
+            presets[presetName] = presetData.presetValues;
 
             eqPresets.forEach(preset => {
                 preset.add(new Option(presetName));

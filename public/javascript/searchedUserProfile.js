@@ -125,8 +125,12 @@ const userId = urlParams.get('userId');
 const username = document.getElementById("profile-username");
 const bio = document.getElementById("profile-bio");
 const userAvatar = document.getElementById("user-avatar");
+
+
 const searchedUserCached = JSON.parse(localStorage.getItem('searchedUser'));
 const profilePosts = document.getElementById("profile-posts");
+
+console.log("user: ", searchedUserCached);
 
 
 const followButton = document.getElementById("follow-button");
@@ -149,8 +153,10 @@ showPresets("searchedUser", presets, profilePosts);
 
 const userDoc = await getDoc(doc(db, "users", userId));
 username.innerHTML = userDoc.data().displayName;
-bio.innerHTML = userDoc.data().bio;
+bio.innerHTML = userDoc.data().userBio;
 userAvatar.innerHTML = userDoc.data().displayName[0];
+
+console.log("bio: ", userDoc.data().userBio);
 
 let userPresets = {};
 

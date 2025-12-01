@@ -82,7 +82,7 @@ onAuthStateChanged(auth, (user) => {
 function onLoad(){
     bioInput.value = getCookie("bio");
     usernameInput.value = getCookie("username");
-    userColor = getCookie("color") || "#ff0000";
+    userColor = getCookie("color") || "#FFFFFF";
     r.style.setProperty('--profileColor', `${userColor}`);
     colorCell.style.backgroundColor = userColor;
     hexCode.innerHTML = userColor;

@@ -192,6 +192,8 @@ input, textarea{
   position: fixed;
   right: 3rem;
   bottom: 3rem;
+  @include button();
+  @include flex(row, space-between, center, 1rem);
 
   button{
     cursor: pointer;

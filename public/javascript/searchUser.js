@@ -52,7 +52,6 @@ searchInput.addEventListener("input", async () => {
                 followed: isFollowed,
             }));
             location.href = './searchedUser.html?userId=' + searchUserId;
-            console.log(searchUserId);
         };
     } else {
         searchResult.innerHTML = `
