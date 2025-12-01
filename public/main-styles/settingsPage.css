@@ -332,6 +332,12 @@ body {
   color: rgba(255, 255, 255, 0.15);
   transition: var(--transition);
 }
+.outer:hover {
+  box-shadow: rgba(255, 255, 255, 0.09) 0 0 30px;
+}
+.outer:hover .inner-text {
+  color: #434343;
+}
 .outer .inner {
   width: 98%;
   height: 93%;
@@ -347,7 +353,7 @@ body {
 }
 .outer .inner .inner-text {
   font-style: normal;
-  transition: var(--transition) s;
+  transition: var(--transition);
 }
 .outer.active {
   z-index: 3;

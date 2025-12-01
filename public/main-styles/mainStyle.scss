@@ -962,6 +962,10 @@ nav{
 
           button{
             border-radius: 10px;
+
+            @include responsive(xlarge) {
+              width: 8rem;
+            }
           }
           button .inner{
             border-radius: 9px;
@@ -1262,6 +1266,7 @@ select, button, input{
 
     button{
       cursor: pointer;
+      width: 7rem;
     }
 
     @include button();
@@ -1464,6 +1469,7 @@ select, button, input{
     transform: translate(-50%, -50%) scale(1);
   }
 
+  @include button();
 
   .preset-save{
     width: 100%;
@@ -1472,6 +1478,8 @@ select, button, input{
     @include flexcenter(column);
     button{
       cursor: pointer;
+      width: 6rem;
+      border-radius: 10px;
     }
 
     & > span{

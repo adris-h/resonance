@@ -947,6 +947,11 @@ function updateKeys(allKeys){
 
 const volWrapper = document.querySelector('#volume-slider');
 
+volWrapper.addEventListener('input', () => {
+    updateVolSliderBackground(volumeSlider);
+});
+
+
 
 // event listener pro stisknutí klávesy
 document.addEventListener('keydown', (e) => {

@@ -29,7 +29,7 @@
 
     <script defer src="javascript/getInfo.js" type="module"></script>
 
-    <script defer src="../javascript/theme.js" type="module"></script>
+    <script defer src="javascript/theme.js" type="module"></script>
   </head>
   <body>
     <div id="loading-screen">
@@ -947,7 +947,11 @@
           </button>
         </span>
 
-        <button id="file-import">import your own</button>
+        <button id="file-import" class="outer">
+            <span class="inner">
+                <i class="inner-text">import audio</i>
+            </span>
+        </button>
       </span>
 
 
@@ -1069,7 +1073,11 @@
         <div>
           <label for="preset-name">enter preset name</label>
           <input type="text" name="preset-name" id="preset-name">
-          <button class="save-eq">save preset to profile</button>
+          <button class="save-eq outer">
+              <span class="inner">
+                  <i class="inner-text">save preset </i>
+              </span>
+          </button>
         </div>
       </div>
     </div>

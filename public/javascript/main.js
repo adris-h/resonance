@@ -188,10 +188,7 @@ export const getUsername = () => user ? user.displayName : null;
 export const getUserId = () => user ? user.uid : null;
 
 export { auth };
-
 window.user = auth.currentUser;
-
-
 onAuthStateChanged(auth, (user) => {
     getDoc(doc(db, "users", user.uid))
         .then(userDoc => {

@@ -1,4 +1,4 @@
-import { getDocs, collection, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+import { getDocs, collection, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 import {showPresets} from "./showPreset.js";
 
@@ -8,19 +8,32 @@ const profileLikes = document.querySelector("#profile-likes");
 const likesButton = document.querySelector("#likes-button");
 const presetsButton = document.querySelector("#posts-button");
 
+async function sortPresetsByDate(presetsQuery) {
+    const presets = await getDocs(presetsQuery);
+    const sortedPresets = [];
+    presets.forEach(doc => {
+        sortedPresets.push(doc);
+    });
+    return sortedPresets;
+}
+
 
 onAuthStateChanged(auth, async (user) => {
     if (user) {
-        const presets = await getDocs(collection(db, "users", user.uid, "presets"));
-        //const likedPresets = await getDocs(collection(db, "users", user.uid, "likes"));
 
-        showPresets("user", presets, profilePosts);
+        const presetsQuery = query(collection(db, "users", user.uid, "presets"), orderBy("createdAt", "desc"));
+        const userPresets = await sortPresetsByDate(presetsQuery);
 
+       showPresets("user", userPresets, profilePosts);
 
         if(likesButton && presetsButton){
             likesButton.addEventListener("click", async () => {
-                const likedPresets = await getDocs(collection(db, "users", user.uid, "likes"));
-                console.log(likedPresets.size)
+                const likedPresetsQuery = await query(collection(db, "users", user.uid, "likes"), orderBy("likedAt", "desc"));
+                const likedPresets = await sortPresetsByDate(likedPresetsQuery);
+
+                console.log("Number of liked presets:", likedPresets.length);
+                console.log("Liked presets:", likedPresets);
+
                 profilePosts.classList.remove("active");
                 profileLikes.classList.add("active");
                 likesButton.classList.add("active");
@@ -32,15 +45,15 @@ onAuthStateChanged(auth, async (user) => {
                 dislikeButton.forEach(button => {
                     button.addEventListener("click", async () => {
                         let currentPreset = button.closest(".preset");
-                        dislikePreset(currentPreset)
-                        console.log("dislike clicked");
+                        await dislikePreset(currentPreset)
                     })
                 });
 
-                function dislikePreset(currentPreset) {
+                async function dislikePreset(currentPreset) {
                     console.log("Unliked preset: " + currentPreset.id);
-                    deleteDoc(doc(db, "users", user.uid, "likes", currentPreset.id));
+                    await deleteDoc(doc(db, "users", user.uid, "likes", currentPreset.id));
                     location.reload();
+
                 }
             })
 
@@ -50,7 +63,7 @@ onAuthStateChanged(auth, async (user) => {
                 presetsButton.classList.add("active");
                 likesButton.classList.remove("active");
 
-                showPresets("user", presets, profilePosts);
+                showPresets("user", userPresets, profilePosts);
 
             })
         }

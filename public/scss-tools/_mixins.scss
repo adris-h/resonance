@@ -40,6 +40,13 @@
     @include flexcenter(row);
     color: rgba(255, 255, 255, 0.15);
     transition: var(--transition);
+    &:hover{
+      box-shadow: rgba(255, 255, 255, 0.09) 0 0 30px;
+
+      .inner-text{
+        color: #434343;
+      }
+    }
 
     .inner{
       width: 98%;
@@ -52,7 +59,7 @@
       background: linear-gradient(179deg, rgb(19, 19, 28) 0%, rgb(13, 13, 18) 100%);
       .inner-text{
         font-style: normal;
-        transition: var(--transition)s;
+        transition: var(--transition);
       }
     }
     &.active{

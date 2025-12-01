@@ -425,7 +425,7 @@ presetSaveButtons.forEach((button) => {
 })
 
 
-
+import { serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
 
 saveEQ.addEventListener('click', () => {
     console.log("length: ", presetSaveNameInput.value.length);
@@ -436,14 +436,10 @@ saveEQ.addEventListener('click', () => {
         userPresets[newPresetName] = {};
 
 
-
-
         let currentPreset = userPresets[newPresetName];
         sliders.forEach((slider, i) => {
             currentPreset[i] = Number(slider.value);
         })
-
-        console.log(userPresets);
 
         eqPresets.forEach(preset => {
             preset.add(new Option(newPresetName))
@@ -470,7 +466,11 @@ saveEQ.addEventListener('click', () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setDoc(doc(db, "users", user.uid, "presets", newPresetName),
-                    currentPreset
+                    {
+                        presetValues: currentPreset,
+                        presetName: newPresetName,
+                        createdAt: serverTimestamp()
+                    }
                 );
             }
         });

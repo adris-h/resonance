@@ -190,7 +190,7 @@ section{
 
         @include flex(row, space-between, center, 0);
 
-        span:nth-child(2){
+        /*span:nth-child(2){
           font-size: 1.5rem;
 
           .preset-settings{
@@ -233,6 +233,23 @@ section{
               opacity: 1;
               visibility: visible;
             }
+          }
+        }*/
+        button{
+          cursor: pointer;
+          background: none;
+          border: none;
+          aspect-ratio: 1/1;
+          width: 1.2rem;
+
+          &.heart{
+            width: 2rem;
+          }
+
+          svg{
+            fill: $textColor;
+            width: 100%;
+            height: 100%;
           }
         }
       }
