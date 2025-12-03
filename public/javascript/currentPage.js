@@ -5,6 +5,7 @@ const projectLink = document.querySelector('.project-link');
 const creatorLink = document.querySelector('.creator-link');
 const keybindslink = document.querySelector('.key-link');
 
+// podle aktualni cesty pridat aktivni tridu na odpovidajici odkaz
 let path = window.location.pathname;
 if (path.includes('account.html')) {
     accountLink.classList.add('active');

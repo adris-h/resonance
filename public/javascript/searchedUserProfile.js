@@ -1,3 +1,5 @@
+
+// importovane moduly Firebase
 import {
     collection,
     deleteDoc,
@@ -10,6 +12,7 @@ import {
 //document.title = "userInfo.username";
 import {showPresets} from "./showPreset.js";
 
+// dve konstanty pre ikony srdecka
 const fullHeartIcon = `
         <?xml version="1.0" encoding="UTF-8" standalone="no"?>
         <svg width="100%" height="100%" viewBox="0 0 11 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -68,9 +71,7 @@ const fullHeartIcon = `
         </svg>
 
 `
-
 const heartIcon = `
-
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg width="100%" height="100%" viewBox="0 0 11 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -118,61 +119,66 @@ const heartIcon = `
 `
 
 
+// ziskani parametru uzivatel z url
 const urlParams = new URLSearchParams(window.location.search);
 const userId = urlParams.get('userId');
 
-
+// ziskani elementu profilu
 const username = document.getElementById("profile-username");
 const bio = document.getElementById("profile-bio");
 const userAvatar = document.getElementById("user-avatar");
+const followButton = document.getElementById("follow-button");
 
 
+// nacteni dat hledaneho uzivatele z localStorage
 const searchedUserCached = JSON.parse(localStorage.getItem('searchedUser'));
 const profilePosts = document.getElementById("profile-posts");
 
-console.log("user: ", searchedUserCached);
 
-
-const followButton = document.getElementById("follow-button");
-
+// pokud jsou data v localStorage tak se nastavi do profilu
+// nejdriv local storage aby to bylo rychle
 if (searchedUserCached && searchedUserCached.id === userId) {
-    username.innerHTML = searchedUserCached.name;
-    bio.innerHTML = searchedUserCached.bio;
-    userAvatar.innerHTML = searchedUserCached.name[0];
-    if(searchedUserCached.followed === true) {
+    username.innerHTML = searchedUserCached.name; // nastaveni jmena
+    bio.innerHTML = searchedUserCached.bio; // nastaveni bia
+    userAvatar.innerHTML = searchedUserCached.name[0]; // nastaveni text avataru na prvni pismeno jmena
+    if(searchedUserCached.followed === true) { // pokud je uzivatel sledovan tak se změeí tlacitko na "Unfollow"
         followButton.innerText = "Unfollow";
     }
+    userAvatar.style.backgroundColor = searchedUserCached.color; // nastaveni barvy avataru
 }
 
+// nacteni presetu hledaneho uzivatele z Firestore
 const presets = await getDocs(collection(db, "users", userId, "presets"));
-
-
 showPresets("searchedUser", presets, profilePosts);
 
-
-
+// nacteni informaci o hledanem uzivateli z Firestore
 const userDoc = await getDoc(doc(db, "users", userId));
+
+// nastaveni informaci do profilu
+// kdyby nahodou nebyly v localStorage nebo byly spatne tak se nactou z Firestore
 username.innerHTML = userDoc.data().displayName;
-bio.innerHTML = userDoc.data().userBio;
+bio.innerHTML = userDoc.data().userBio === undefined ? " " : userDoc.data().userBio;
 userAvatar.innerHTML = userDoc.data().displayName[0];
+userAvatar.style.backgroundColor = userDoc.data().userColor || "#FFFFFF";
 
-console.log("bio: ", userDoc.data().userBio);
 
+// zatim prazdny objekt pro uzivatelske presety
 let userPresets = {};
 
-
-
-
-followButton.addEventListener("click", followUser);
-
-
+// aktualne prihlaseny uzivatel
 const user = auth.currentUser;
+
+// nacteni presetu ktere uzivatel lajknul
 const likedPreset = await getDocs(collection(db, "users", user.uid, "likes"));
 
+// projiti vsech presetu hledaneho uzivatele
 presets.forEach((preset) => {
     const presetName = preset.id;
     userPresets[presetName] = preset.data();
 
+
+    // a zkontrolovani jestli je uzivatel lajknul
+    // pokud jo tak se změní ikona tlacitka na plne srdicko
     let isLiked = false;
     likedPreset.forEach((doc) => {
         const likedPresetData = doc.data();
@@ -182,6 +188,7 @@ presets.forEach((preset) => {
         }
     });
 
+    // ziskani elementu presetu a tlacitka pro lajkovani
     const presetElement = document.getElementById(presetName);
     if(presetElement) {
         const likeButton = presetElement.querySelector('.like-preset-button');
@@ -196,28 +203,16 @@ presets.forEach((preset) => {
 })
 
 
-function followUser() {
-    if (user) {
-        console.log(user.displayName + " followed " + searchedUserCached.name);
-        followButton.innerText = "Unfollow";
+// pridani event listeneru na follow tlacitko
+followButton.addEventListener("click", followUser);
 
-        setDoc(doc(db, "users", user.uid, "following", searchedUserCached.id), {
-            followedAt: new Date(),
-            followedUserId: searchedUserCached.id,
-            followedUserName: searchedUserCached.name
-        })
 
-        localStorage.setItem('searchedUser', JSON.stringify({
-            name: searchedUserCached.name,
-            bio: searchedUserCached.bio || "",
-            id: searchedUserCached.id,
-            followed: true
-        }));
-    }
-}
 
+// ziskani vsech uzivatelu ktere aktualne prihlaseny uzivatel sleduje
 const followingDocs = await getDocs(collection(db, "users", user.uid, "following"));
 
+// projiti vsech sledovanych uzivatelu a pokud je mezi nimi hledany uzivatel
+// tak se změní tlacitko na "Unfollow" a priradi se mu funkce pro odsledovani
 followingDocs.forEach((doc) => {
     const followedUser = doc.data();
     if (followedUser.followedUserId === searchedUserCached.id) {
@@ -227,9 +222,34 @@ followingDocs.forEach((doc) => {
     }
 });
 
+// funkce pro sledovani uzivatele
+function followUser() {
+    if (user) {
+        followButton.innerText = "Unfollow";
+
+        // nastaveni dokumentu do kolekce following s informacemi o sledovanem uzivateli
+        setDoc(doc(db, "users", user.uid, "following", searchedUserCached.id), {
+            followedAt: new Date(),
+            followedUserId: searchedUserCached.id,
+            followedUserName: searchedUserCached.name
+        })
+
+        localStorage.setItem('searchedUser', JSON.stringify({
+            name: searchedUserCached.name,
+            bio: searchedUserCached.bio,
+            id: searchedUserCached.id,
+            color: searchedUserCached.color,
+            followed: true
+        }));
+
+
+    }
+}
+
+// funkce pro odsledovani uzivatele
 function unfollowUser() {
     if (user) {
-        console.log(user.displayName + " unfollowed " + searchedUserCached.name);
+        // smazani dokumentu z kolekce following
         deleteDoc(doc(db, "users", user.uid, "following", searchedUserCached.id));
         followButton.innerText = "Follow";
 
@@ -237,13 +257,14 @@ function unfollowUser() {
             name: searchedUserCached.name,
             bio: searchedUserCached.bio || "",
             id: searchedUserCached.id,
+            color: searchedUserCached.color,
             followed: false
         }));
     }
 }
 
 
-
+// pridani event listeneru na vsechna tlacitka pro lajkovani presetu
 const likeButtons = document.querySelectorAll(".like-preset-button");
 likeButtons.forEach(button => {
     button.addEventListener("click", async () => {
@@ -260,8 +281,9 @@ likeButtons.forEach(button => {
     })
 });
 
+
+// funkce pro lajkovani presetu
 async function likePreset(currentPreset) {
-    console.log("Liked preset: " + currentPreset.id);
     await setDoc(doc(db, "users", user.uid, "likes", `${userId}_${currentPreset.id}`), {
         presetData: userPresets[currentPreset.id],
         presetName: searchedUserCached.name + " - " +  currentPreset.id,
@@ -270,9 +292,8 @@ async function likePreset(currentPreset) {
     });
 }
 
-
+// funkce pro odlajkovani presetu
 async function dislikePreset(currentPreset) {
-    console.log("Unliked preset: " + currentPreset.id);
     await deleteDoc(doc(db, "users", user.uid, "likes", `${userId}_${currentPreset.id}`));
 }
 

@@ -243,6 +243,7 @@ function deleteCookie(cname) {
 const r = document.querySelector(':root');
 
 let userColor = getCookie("color");
+
 onAuthStateChanged(auth, (user) => {
     if (userColor) {
         getDoc(doc(db, "users", user.uid))
@@ -252,5 +253,45 @@ onAuthStateChanged(auth, (user) => {
                 }
             })
     }
+
 });
 r.style.setProperty('--profileColor', `${userColor}`);
+
+
+let highlightColor = getCookie('highlightColor') || '#66d1ff';
+let accentColor = getCookie('accentColor') || '#06b7fd';
+let accentColorDarker = getCookie('accentColorDarker') || '#0269b8';
+
+
+
+let path = window.location.pathname;
+if (path.includes('main.html')){
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            try {
+                const themeDoc = await getDoc(doc(db, "users", user.uid, "themes", "currentTheme"));
+                if (themeDoc.exists()) {
+                    const themeData = themeDoc.data();
+                    highlightColor = themeData.highlightColor || '#66d1ff';
+                    accentColor = themeData.accentColor || '#06b7fd';
+                    accentColorDarker = themeData.accentColorDarker || '#0269b8';
+
+                    applyThemeColors();
+                } else {
+                    console.log("no theme found using defaults");
+                }
+            } catch (error) {
+                console.error("error fetching theme:", error);
+            }
+        }
+    })
+    applyThemeColors();
+}
+
+function applyThemeColors() {
+    r.style.setProperty('--highlightColor', highlightColor);
+    r.style.setProperty('--accentColor', accentColor);
+    r.style.setProperty('--accentColorDarker', accentColorDarker);
+}
+
+

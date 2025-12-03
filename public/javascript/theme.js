@@ -158,5 +158,4 @@ function applyThemeColors() {
         hexCode2.innerHTML = accentColor;
         hexCode3.innerHTML = accentColorDarker;
     }
-
 }

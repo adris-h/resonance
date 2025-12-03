@@ -7,6 +7,8 @@ import {
 import {auth} from "./main.js";
 
 
+// implementace ekvalizeru pro dva audio tracky
+// pro kazdy track se ulozi kontejner, buttony, slidery, filtry a audio element
 const equalizers = {
     track1: {
         container: document.getElementById('eq1'),
@@ -32,8 +34,10 @@ const equalizers = {
     }
 }
 
+// defualtni nastaveni aktivniho ekvalizeru na prvni track
 let activeEQ = equalizers.track1;
 
+// frekvence a ID slideru pro kazdy ekvalizer band
 const eqBands = [
     { freq: 32, sliderID: "slider32" },
     { freq: 64, sliderID: "slider64" },
@@ -47,6 +51,7 @@ const eqBands = [
     { freq: 16000, sliderID: "slider16k" }
 ];
 
+// preddefinovane ekvalizer presety
 const presets = {
     'bass-boosted': [5, 4, 3, 2, 1, 0, 0, 0, 0, 0],
     'jazz': [2, 1, 1, 0, -1, -1, 0, 1, 2, 3],
@@ -56,20 +61,24 @@ const presets = {
     'max': [12, 12, 12, 12, 12, 12, 12, 12, 12, 12]
 };
 
+// vytvoreni AudioContextu pro ekvalizer z Web Audio API
 const audioContext = new AudioContext();
 
+// funkce pro aktualizaci pozadi slideru podle jeho hodnoty
 function updateSliderBackground(slider) {
     const min = Number(slider.min);
     const max = Number(slider.max);
     const value = Number(slider.value);
     const percent = (max - value) / (max - min) * 100;
 
+    // ziskani barev z css promennych
     const rootStyles = getComputedStyle(document.documentElement);
     const accentColor = rootStyles.getPropertyValue('--accentColor').trim();
     const highlightColor = rootStyles.getPropertyValue('--highlightColor').trim();
     const accentColorDarker = rootStyles.getPropertyValue('--accentColorDarker').trim();
     const unselectedColor = '#1c1c1c';
 
+    // nastaveni linearniho gradientu jako pozadi slideru jelikoz css to nedokaze chud
     slider.style.background = `linear-gradient(
         to top,
         ${unselectedColor} ${percent}%,
@@ -79,25 +88,30 @@ function updateSliderBackground(slider) {
     )`;
 }
 
+// funkce pro inicializaci ekvalizeru pro dany track
 function initilzieEqualizer(trackName, containerId, audioSelector) {
     const container = document.getElementById(containerId);
     const sliders = container.querySelectorAll('.eq-slider');
     const audioEl = document.querySelector(audioSelector);
     const trackSource = audioContext.createMediaElementSource(audioEl);
 
+    // "rychla" tlacitka pro nastaveni ekvalizeru na max, mid a min hodnoty
     const quickBtns= [
         container.querySelector('.max-eq'),
         container.querySelector('.mid-eq'),
         container.querySelector('.min-eq'),
     ];
 
+    // vytvoreni filtru pro kazdy band ekvalizeru
     const filters = eqBands.map((band, i) => {
+        // vytvoreni biquad filtru typu peaking - coz je vhodny pro ekvalizery, je to vlastne pasmovy filter s nastavitelnym zesilenim
         const filter = audioContext.createBiquadFilter();
         filter.type = 'peaking';
         filter.frequency.value = band.freq;
         filter.Q.value = 1;
         filter.gain.value = 0;
 
+        // prirazeni slideru k filtru a nastaveni event listeneru pro zmenu hodnoty
         const slider = sliders[i];
         const valueDisplay = slider.closest('.band').querySelector('.eq-slider-value');
         valueDisplay.textContent = slider.value;
@@ -111,7 +125,7 @@ function initilzieEqualizer(trackName, containerId, audioSelector) {
         return filter;
     });
 
-    // Connect filters
+    // propojeni audio zdroje s filtry a vystupem AudioContextu, to zajisti, ze audio prochazi pres ekvalizer
     trackSource.connect(filters[0]);
     for (let i = 0; i < filters.length - 1; i++) {
         filters[i].connect(filters[i + 1]);
@@ -124,21 +138,25 @@ function initilzieEqualizer(trackName, containerId, audioSelector) {
 }
 
 
-
+// inicializace ekvalizeru pro oba tracky
 equalizers.track1 = initilzieEqualizer('track1', 'eq1', '.audio');
 equalizers.track2 = initilzieEqualizer('track2', 'eq2', '.audio2');
 
+// nastaveni vychoziho aktivniho ekvalizeru
 activeEQ = equalizers.track1;
 
+// pridani event listeneru na tlacitka pro prepnuti mezi tracky
 document.getElementById('source1-button').addEventListener('click', () => {
     activeEQ = equalizers.track1;
     dbClick(activeEQ)
 });
+
 document.getElementById('source2-button').addEventListener('click', () => {
     activeEQ = equalizers.track2;
     dbClick(activeEQ)
 });
 
+// obnova AudioContextu pri interakci uzivatele (nutne pro spoustu prohlizecu)
 document.addEventListener('click', async () => {
     if (audioContext.state === 'suspended') await audioContext.resume();
 });
@@ -146,10 +164,12 @@ document.addEventListener('keydown', async e => {
     if (e.code === 'Space' && audioContext.state === 'suspended') await audioContext.resume();
 });
 
+
 const eqPresets = document.querySelectorAll('.eq-presets');
 const customOption = document.querySelectorAll('.custom-eq');
 const resetBtn = document.querySelectorAll('.reset-eq');
 
+// funkce pro aplikaci preddefinovaneho presetu na aktivni ekvalizer
 function applyPreset(values) {
     for (const el of customOption) el.style.display = 'none';
     activeEQ.filters.forEach((filter, i) => {
@@ -166,57 +186,60 @@ function resetEQ() {
     eqPresets.forEach(p => p.value = 'flat');
 
 }
-
-//resetBtn.forEach(btn => btn.addEventListener('click', resetEQ));
-
+// pridani event listeneru na tlacitka pro reset ekvalizeru
 eqPresets.forEach(eqPreset => {
     eqPreset.addEventListener('change', () => {
         const presetValues = presets[eqPreset.value];
+
+        // ziskani spravneho ekvalizeru podle kontejneru
         const container = eqPreset.closest('.eq-settings');
         let eq;
+
+        // zvoleni ekvalizeru podle id kontejneru
         if(container.id === 'eq1') eq = equalizers.track1;
         if(container.id === 'eq2') eq = equalizers.track2;
 
-
+        // zobrazeni nebo skryti vlastniho presetu podle vybrane hodnoty
         eq.filters.forEach((filter, i) => {
             const slider = eq.sliders[i];
-            const valueDisplay = slider.closest('.band').querySelector('.eq-slider-value');
-            slider.value = presetValues[i];
-            filter.gain.value = presetValues[i];
-            valueDisplay.textContent = presetValues[i];
-            updateSliderBackground(slider);
-        });
 
-        console.log("container: ", container.id)
+            // ziskani kontejneru hodnoty nejblizsiho slideru
+            const valueDisplay = slider.closest('.band').querySelector('.eq-slider-value');
+            slider.value = presetValues[i]; // nastaveni hodnoty slideru podle presetu
+            filter.gain.value = presetValues[i]; // nastaveni hodnoty filtru podle presetu
+            valueDisplay.textContent = presetValues[i]; // aktualizace zobrazeni hodnoty
+            updateSliderBackground(slider); // aktualizace pozadi slideru
+        });
     });
 });
 
+// klavesove zkratky pro ekvalizer - nahrani z external json souboru
 const keybindsData = 'keybinds.json'
 
+// funkce pro ziskani dat o klavesovych zkratkach
 async function getKeys(){
     const response = await fetch(keybindsData);
     return await response.json();
 }
 
-
+// nacteni klavesovych zkratek a jejich aplikace
 getKeys().then(data => {
-    // console.log(data);
     updateKeys(data);
 })
 
 let keys = [];
 let increaseKey, decreaseKey, eqKey1, eqKey2;
 
-
+// kontrola jestli uzivatel nema vlastni zkratky ulozene v local storage
 let checkTrue = localStorage.getItem('areBindsUsers');
 let savedBinds = JSON.parse(localStorage.getItem("userKeybinds"));
 
+// funkce pro aktualizaci klavesovych zkratek podle nactenych dat
 function updateKeys(data) {
     let allEqBands = data["equalizerBands"];
     keys = Object.values(allEqBands);
     eqKey1 = data["eq1"];
     eqKey2 = data["eq2"];
-
 
     if(checkTrue !== "true"){
         increaseKey = data["increase"];
@@ -234,20 +257,20 @@ const keysPressed = new Set();
 
 document.addEventListener('keydown', (e) => {
 
-    /*console.log("activeEQ.sliders:", activeEQ.sliders);
-    console.log("activeEQ.filters:", activeEQ.filters);*/
-
+    // jestli je aktivni import kontejner tak disable klavesove zkratky
     if (getImportState()) {
         console.log("cant use shortcuts");
         return;
     }
-
+    // pro kazdou klavesu se prida do setu pokud odpovida nejake z klaves pro ekvalizer
     keys.forEach((keyCode, index) => {
         if (e.code === keyCode) {
             keysPressed.add(index);
         }
     });
 
+    // pokud je stisknuta klavesa pro zvyseni nebo snizeni hodnoty
+    // tak se podle setu stisknutych klaves upravi hodnoty ekvalizeru
     if (e.code === increaseKey) {
         keysPressed.forEach(i => {
             const slider = activeEQ.sliders[i];
@@ -255,14 +278,12 @@ document.addEventListener('keydown', (e) => {
             slider.value = Number(slider.value) + 1
             if (filter) updateSliderAndFilter(slider, filter);
 
-
-            /*console.log("slider: ", slider, "slider value:", slider.value);
-            console.log("filer: ", filter, "filter value:", filter.gain.value)*/
         });
 
         activeEQ.container.querySelectorAll('.eq-presets').forEach(sel => sel.value = 'custom');
     }
 
+    // to same pro snizeni hodnoty
     if (e.code === decreaseKey) {
         keysPressed.forEach(i => {
             const slider = activeEQ.sliders[i];
@@ -275,8 +296,8 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// odstraneni klavesy ze setu pri uvolneni
 document.addEventListener('keyup', (e) => {
-
     keys.forEach((keyCode, index) => {
         if (e.code === keyCode) {
             keysPressed.delete(index);
@@ -284,6 +305,7 @@ document.addEventListener('keyup', (e) => {
     });
 });
 
+// funkce pro aktualizaci slideru a prislusneho filtru
 function updateSliderAndFilter(slider, filter) {
     const value = Number(slider.value);
     filter.gain.value = value;
@@ -295,9 +317,8 @@ function updateSliderAndFilter(slider, filter) {
 }
 
 
-
+// funkce pro zmenu zdroje ekvalizeru
 function changeSource(activeBtn, inactiveBtn, activeEq, inactiveEq){
-
     if(!activeBtn.classList.contains('active')) {
         activeBtn.classList.add('active');
         inactiveBtn.classList.remove('active');

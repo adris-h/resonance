@@ -1,4 +1,4 @@
-export function getBPM( audioElements ){
+ function getBPM( audioElements ){
         //console.log('audio.src: ', audioElement.src);
          const beatDetect = new BeatDetect({
         sampleRate: 44100, // Most track are using this sample rate
@@ -30,3 +30,5 @@ export function getBPM( audioElements ){
 
 
 }
+
+ export {getBPM}

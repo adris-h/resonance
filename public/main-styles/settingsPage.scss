@@ -51,9 +51,11 @@
     }
   }
   .settings-container{
-    background: rgba(0, 0, 0, 0.16);
-    height: 100%;
+    //background: rgba(0, 0, 0, 0.16);
+    height: 60%;
     width: 80%;
+
+    position: relative;
     @include flexcenter(column);
     &_wrapper{
       width: 80%;
@@ -126,8 +128,6 @@ input, textarea{
 }
 
 #keybinds-container{
-
-
   p{
     opacity: .2;
   }
@@ -222,6 +222,8 @@ input, textarea{
   color: $unselectedColor;
 }
 
+
+
 #theme-options{
   @include flex(row, flex-start, center, 2rem);
 
@@ -258,5 +260,8 @@ input, textarea{
 }
 
 #button-holder{
-    @include flex(row, flex-start, center, 1rem);
+  @include flex(row, flex-start, center, 1rem);
+  position: absolute;
+  bottom: 1rem;
+  right: 4rem;
 }
