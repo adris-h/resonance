@@ -75,16 +75,13 @@
         background: radial-gradient(circle, $highlightColor 0%, $accentColor 56%, $accentColor 100%);
         box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
 
-        color: var(--activeButtonText);
-      }
-    }
-    &:active {
-      .inner{
         .inner-text {
+          color: var(--activeButtonText);
           transform: scale(.9);
         }
       }
     }
+
   }
 }
 

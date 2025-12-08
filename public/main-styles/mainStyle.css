@@ -525,9 +525,9 @@ nav {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#main .song-import-wrapper div > span .outer:active .inner .inner-text {
+#main .song-import-wrapper div > span .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #main .song-import-wrapper div > span span {
@@ -661,9 +661,9 @@ nav {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#main .main-wrapper_audio-visualiser .vinyl-toggle-wrapper .outer:active .inner .inner-text {
+#main .main-wrapper_audio-visualiser .vinyl-toggle-wrapper .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #main .main-wrapper_audio-visualiser .vinyl-toggle-wrapper button {
@@ -1124,9 +1124,9 @@ nav {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#main .main-wrapper_audio-visualiser .song-controls_buttons .outer:active .inner .inner-text {
+#main .main-wrapper_audio-visualiser .song-controls_buttons .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #main .main-wrapper_audio-visualiser .song-controls_buttons select {
@@ -1233,9 +1233,9 @@ nav {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#main .side-wrapper_source-toggle .outer:active .inner .inner-text {
+#main .side-wrapper_source-toggle .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 @media only screen and (max-width: 1000px) and (min-width: 900px) {
@@ -1337,9 +1337,9 @@ nav {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#main .side-wrapper .top_wrapper .eq-toggle .outer:active .inner .inner-text {
+#main .side-wrapper .top_wrapper .eq-toggle .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #main .side-wrapper .top_wrapper .eq-toggle button {
@@ -1403,9 +1403,9 @@ nav {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#main .side-wrapper .top_wrapper .eq-track-toggle .outer:active .inner .inner-text {
+#main .side-wrapper .top_wrapper .eq-track-toggle .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #main .side-wrapper .top_wrapper .eq-track-toggle button {
@@ -1623,9 +1623,9 @@ nav {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#main .side-wrapper .top_wrapper .eq-settings .eq-buttons .outer:active .inner .inner-text {
+#main .side-wrapper .top_wrapper .eq-settings .eq-buttons .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 @media only screen and (max-width: 900px) {
@@ -1983,9 +1983,9 @@ select:focus, button:focus, input:focus {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#song-library #audio-choice .outer:active .inner .inner-text {
+#song-library #audio-choice .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #song-library #audio-choice #file-import .inner {
@@ -2054,9 +2054,9 @@ select:focus, button:focus, input:focus {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#song-library #audio-choice span .outer:active .inner .inner-text {
+#song-library #audio-choice span .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #song-library #audio-choice span button {
@@ -2286,9 +2286,9 @@ select:focus, button:focus, input:focus {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-.preset-save-bcg .outer:active .inner .inner-text {
+.preset-save-bcg .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 .preset-save-bcg .preset-save {

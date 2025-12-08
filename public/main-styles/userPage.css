@@ -365,9 +365,9 @@ section #post-buttons .outer.active .inner {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-section #post-buttons .outer:active .inner .inner-text {
+section #post-buttons .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 section #post-buttons #posts-button, section #post-buttons #posts-button .inner {

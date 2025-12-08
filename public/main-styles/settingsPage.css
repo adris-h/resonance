@@ -379,9 +379,9 @@ body {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-.outer:active .inner .inner-text {
+.outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 
@@ -526,9 +526,9 @@ input:focus, textarea:focus {
   height: 100%;
   background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
   box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
-  color: var(--activeButtonText);
 }
-#keybinds-button .outer:active .inner .inner-text {
+#keybinds-button .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
   transform: scale(0.9);
 }
 #keybinds-button button {
