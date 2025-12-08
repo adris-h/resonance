@@ -19,10 +19,20 @@ let accentColorDarker = getCookie('accentColorDarker') || '#0269b8';
 
 applyThemeColors();
 
+let themeMode = getCookie('themeMode') || 'dark-mode';
+
+if (themeMode === 'dark-mode') {
+    setDarkMode();
+} else if (themeMode === 'light-mode') {
+    setLightMode();
+}
+
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         try {
             const themeDoc = await getDoc(doc(db, "users", user.uid, "themes", "currentTheme"));
+            const themeModeDoc = await getDoc(doc(db, "users", user.uid, "themes", "themeMode"));
+
 
             if (themeDoc.exists()) {
                 const themeData = themeDoc.data();
@@ -31,6 +41,14 @@ onAuthStateChanged(auth, async (user) => {
                 accentColorDarker = themeData.accentColorDarker || '#0269b8';
 
                 applyThemeColors();
+            } else if(themeModeDoc.exists()) {
+                const themeModeData = themeDoc.data();
+                if(themeModeData.theme === 'dark-mode') {
+                    setDarkMode();
+                } else {
+                    setLightMode();
+                }
+
             } else {
                 console.log("no theme found using defaults");
             }
@@ -158,4 +176,90 @@ function applyThemeColors() {
         hexCode2.innerHTML = accentColor;
         hexCode3.innerHTML = accentColorDarker;
     }
+}
+const darkMode = document.getElementById("dark-mode");
+const lightMode = document.getElementById("light-mode");
+
+if(darkMode && lightMode){
+    darkMode.addEventListener("click", async () => {
+        setDarkMode()
+
+        console.log(getCookie("themeMode"));
+        console.log("clicked")
+
+        setCookie("themeMode", "dark-mode");
+
+        await setDoc(doc(db, "users", user.uid, "themes", "mode"), {
+            theme: "dark-mode",
+        }, { merge: true });
+    })
+
+    lightMode.addEventListener("click", async() => {
+        setLightMode()
+
+        setCookie("themeMode", "light-mode");
+        console.log(getCookie("themeMode"))
+        console.log("clicked")
+
+        await setDoc(doc(db, "users", user.uid, "themes", "mode"), {
+            theme: "light-mode",
+        }, { merge: true });
+    })
+}
+
+
+console.log(getCookie("themeMode"));
+
+
+function setDarkMode() {
+    let bcgColor = '#0c0c0f';
+    let textColor = '#dedede';
+    let barelyVisible = '#232324';
+
+    let buttonBcg = '#101016FF'
+
+    let buttonGrad1 = '#13131CFF'
+    let buttonGrad2 = '#0D0D12FF'
+
+    let buttonBorder1 = '#10101F'
+    let buttonBorder2 = '#2A2B2E99'
+
+    let activeButtonColor = '#232324'
+
+    let buttonTextColor = '#33333b'
+
+    setMode(bcgColor, textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor);
+}
+
+function setLightMode() {
+    let bcgColor = '#FAF3E1';
+    let textColor = '#0c0c0f';
+
+    let barelyVisible = '#dfd2b9';
+
+    let buttonBcg = '#dfd2b9'
+
+    let buttonGrad1 = '#ede0be'
+    let buttonGrad2 = '#e9dabf'
+
+    let buttonBorder1 = '#eee0c7'
+    let buttonBorder2 = '#dfd2b9'
+
+    let activeButtonColor = '#dfd2b9'
+    let buttonTextColor = '#0c0c0f'
+
+    setMode(bcgColor,textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor);
+}
+
+function setMode(bcgColor, textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor) {
+    r.style.setProperty('--bcgColor', bcgColor);
+    r.style.setProperty('--textColor', textColor);
+    r.style.setProperty('--barelyVisible', barelyVisible);
+    r.style.setProperty('--buttonBackground', buttonBcg);
+    r.style.setProperty('--buttonGradient1', buttonGrad1);
+    r.style.setProperty('--buttonGradient2', buttonGrad2);
+    r.style.setProperty('--buttonBorder1', buttonBorder1);
+    r.style.setProperty('--buttonBorder2', buttonBorder2);
+    r.style.setProperty('--activeButtonText', activeButtonColor);
+    r.style.setProperty('--buttonText', buttonTextColor);
 }

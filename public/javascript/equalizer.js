@@ -76,7 +76,7 @@ function updateSliderBackground(slider) {
     const accentColor = rootStyles.getPropertyValue('--accentColor').trim();
     const highlightColor = rootStyles.getPropertyValue('--highlightColor').trim();
     const accentColorDarker = rootStyles.getPropertyValue('--accentColorDarker').trim();
-    const unselectedColor = '#1c1c1c';
+    const unselectedColor = rootStyles.getPropertyValue('--barelyVisible').trim();
 
     // nastaveni linearniho gradientu jako pozadi slideru jelikoz css to nedokaze chud
     slider.style.background = `linear-gradient(

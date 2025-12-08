@@ -731,7 +731,7 @@ function updateSliderBackground(slider) {
     const accentColor = rootStyles.getPropertyValue('--accentColor').trim();
     const highlightColor = rootStyles.getPropertyValue('--highlightColor').trim();
     const accentColorDarker = rootStyles.getPropertyValue('--accentColorDarker').trim();
-    const unselectedColor = '#1c1c1c';
+    const unselectedColor = rootStyles.getPropertyValue('--barelyVisible').trim();
 
     slider.style.background = `linear-gradient(
         -90deg,
@@ -1148,7 +1148,7 @@ function updateVolSliderBackground(slider) {
     const accentColor = rootStyles.getPropertyValue('--accentColor').trim();
     const highlightColor = rootStyles.getPropertyValue('--highlightColor').trim();
     const accentColorDarker = rootStyles.getPropertyValue('--accentColorDarker').trim();
-    const unselectedColor = '#08080a';
+    const unselectedColor = rootStyles.getPropertyValue('--barelyVisible').trim();
 
     slider.style.background = `linear-gradient(
         to top,

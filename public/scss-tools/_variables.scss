@@ -1,7 +1,11 @@
 $light: #E9E3DF;
 $dark: #465C88;
 $mainColor: var(--mainColor);
+
+
 $textColor: var(--textColor);
+
+
 $errorColor: var(--errorColor);
 $bcgColor: var(--bcgColor);
 $highlightColor: var(--highlightColor);
@@ -21,7 +25,7 @@ $profileColor: var(--profileColor);
 
 :root{
   --mainColor: #393053;
-  --textColor: #dedede;
+  --textColor: #dedede; // #dedede
   --errorColor: #ff595e;
 
   --profileColor: white;
@@ -34,7 +38,25 @@ $profileColor: var(--profileColor);
   --accentColorDarker: #0269b8;
 
   --unselectedColor: #343436;
-  --seekerColor: rgba(255, 255, 255, 0.07);
+
+  --barelyVisible: #232324;
+
+  --buttonBackground: #101016FF;
+  --buttonGradient1: #13131CFF;
+  --buttonGradient2: #0D0D12FF;
+
+  --activeButtonText: #232324;
+  --buttonText: #33333b;
+
+  --buttonBorder1: #10101F;
+  --buttonBorder2: #2A2B2E99;
+
+  /*--buttonBackground: rgb(16, 16, 22);
+  --buttonGradient1: rgb(19, 19, 28);
+  --buttonGradient2: rgb(13, 13, 18);
+
+  --buttonBorder1: #10101F;
+  --buttonBorder2: rgba(42, 43, 46, 0.6);*/
 
   --borderRadius: 15px;
   --transition: 0.3s;

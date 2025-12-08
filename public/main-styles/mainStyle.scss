@@ -365,10 +365,13 @@ nav{
         .song-cover {
           width: 100%;
           aspect-ratio: 1/1;
-          background-color: black;
           position: relative;
           box-shadow: 0 0 120px rgba(74, 74, 74, 0.16);
           overflow: hidden;
+
+          &.vinyl{
+            background-color: black;
+          }
 
           .triangle{
             position: absolute;
@@ -537,6 +540,7 @@ nav{
             width: 100%;
             height: 100%;
             @include flex(row, space-between, space-around, 0);
+            color: color-mix(in srgb, var(--barelyVisible) 70%, black);
           }
 
           input[type="range"] {
@@ -578,6 +582,10 @@ nav{
           height: 100%;
           @include flex(row, space-between, center, 0);
 
+
+
+
+
           div:nth-child(2){
             @include flexcenter(row);
             gap: .5rem;
@@ -592,6 +600,8 @@ nav{
             span{
               width: 1.5rem;
               cursor: pointer;
+
+
             }
 
             .vol-slider {
@@ -871,6 +881,7 @@ nav{
             width: 10%;
             @include flex(column, space-between, center, 0);
 
+
             span{
               cursor: pointer;
               user-select: none;
@@ -915,10 +926,15 @@ nav{
 
               label{
                 height: 10%;
+
                 span{
                   font-size: 1em;
                   color:  var(--textColor);
                 }
+              }
+
+              .eq-slider-value{
+                color: var(--barelyVisible);
               }
 
               input[type="range"] {
@@ -1149,12 +1165,12 @@ select, button{
 
 select{
   cursor: pointer;
-  background: rgb(16, 16, 22);
-  background: linear-gradient(179deg, rgb(19, 19, 28) 0%, rgb(13, 13, 18) 100%);
+  background: var(buttonBackground);
+  background: linear-gradient(179deg, var(--buttonGradient1) 0%, var(--buttonGradient2) 100%);
   border: 1px solid rgba(255, 255, 255, 0.02);
   border-bottom: none;
   height: 1.8em;
-  color: rgba(255, 255, 255, 0.15);
+  color: var(--buttonText);
   border-radius: 10px;
   font-size: 1em;
   padding-left: 1rem;
@@ -1542,5 +1558,11 @@ select, button, input{
     }
   }
 
+}
+
+svg{
+  .b {
+    fill: $textColor;
+  }
 }
 

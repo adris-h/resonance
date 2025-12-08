@@ -50,8 +50,10 @@ document.addEventListener("keydown", e => {
             }
         });
 
+        const rootStyles = getComputedStyle(document.documentElement);
         if (canSubmit) {
-            activeButton.closest("div").querySelector("h2").style.color = "white";
+            let textColor = rootStyles.getPropertyValue('--textColor').trim()
+            activeButton.closest("div").querySelector("h2").style.color = textColor;
         }
         console.log("can submit: ", canSubmit);
     }

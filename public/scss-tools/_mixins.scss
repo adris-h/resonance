@@ -35,16 +35,17 @@
     cursor: pointer;
     height: 1.8em;
     border: none;
-    background: linear-gradient(to top, #10101F 0%, rgba(42, 43, 46, 0.6) 100%);
+    background: linear-gradient(to top, var(--buttonBorder1) 0%, var(--buttonBorder2) 100%);
     padding: 0;
     @include flexcenter(row);
-    color: rgba(255, 255, 255, 0.15);
+    color: var(--textColor);
+  // color-mix(in srgb, var(--barelyVisible) 70%, black)
     transition: var(--transition);
     &:hover{
       box-shadow: rgba(255, 255, 255, 0.09) 0 0 30px;
 
       .inner-text{
-        color: #434343;
+        color: color-mix(in srgb, var(--activeButtonText) 100%, transparent);
       }
     }
 
@@ -55,11 +56,15 @@
       padding: 0 .5em;
       @include flexcenter(row);
       font-size: 1em;
-      background: rgb(16, 16, 22);
-      background: linear-gradient(179deg, rgb(19, 19, 28) 0%, rgb(13, 13, 18) 100%);
+      /*background: rgb(16, 16, 22);
+      background: linear-gradient(179deg, rgb(19, 19, 28) 0%, rgb(13, 13, 18) 100%);*/
+      background: var(--buttonBackground);
+      background: linear-gradient(179deg, var(--buttonGradient1) 0%, var(--buttonGradient2) 100%);
+
       .inner-text{
         font-style: normal;
         transition: var(--transition);
+        color: var(--buttonText);
       }
     }
     &.active{
@@ -67,11 +72,10 @@
       .inner{
         width: 100%;
         height: 100%;
-        background: #66D1FF;
         background: radial-gradient(circle, $highlightColor 0%, $accentColor 56%, $accentColor 100%);
         box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
 
-        color: #000000;
+        color: var(--activeButtonText);
       }
     }
     &:active {

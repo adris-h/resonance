@@ -23,7 +23,7 @@
       opacity: .2;
     }
     a{
-      color: white;
+      color: var(--textColor);
       height: 2.5rem;
       @include flexcenter(row);
       width: 60%;
@@ -120,11 +120,11 @@ input, textarea{
   box-sizing: border-box;
 
   background: transparent;
-  color: white;
+  color: var(--textColor);
 
   font-size: 1rem;
 
-  border-bottom: .1rem solid white;
+  border-bottom: .1rem solid var(--textColor);
   transition: 300ms;
 
   &:focus{
@@ -164,17 +164,18 @@ input, textarea{
         h2{
           line-height: 1rem;
           margin: 0;
+
         }
       }
 
 
 
       button{
-        background: rgba(255, 255, 255, 0.1);
+        background: color-mix(in srgb, var(--barelyVisible) 50%, transparent);
         //border: 1px solid var(--highlightColor);
         border: none;
         margin: 0;
-        color: white;
+        color: var(--textColor);
         cursor: pointer;
         border-radius: 10px;
 
@@ -186,7 +187,7 @@ input, textarea{
         outline: none;
 
         &.active{
-          background: rgba(255, 255, 255, 0.2);
+          background: color-mix(in srgb, var(--barelyVisible) 20%, transparent);
         }
       }
     }

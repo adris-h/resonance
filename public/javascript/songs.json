@@ -13,14 +13,6 @@
     "src": "audios/downfall.mp3",
     "bpm": "83"
   },
-  "whi001": {
-    "name": "White Cat",
-    "artist": "Yves",
-    "cover": "imgs/song-covers/white-cat-cover.webp",
-    "src": "audios/white-cat.mp3",
-    "bpm": "116"
-  },
-
   "asp001": {
     "name": "Asphinal",
     "artist": "Asphinal",
