@@ -1,7 +1,8 @@
 @import '../scss-tools/mixins';
 
 #loading-screen {
-  background: black;
+  background: var(--bcgColor);
+  color: var(--textColor);
 
   position: fixed;
 

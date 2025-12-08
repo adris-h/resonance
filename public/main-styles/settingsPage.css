@@ -17,12 +17,6 @@
   --buttonText: #33333b;
   --buttonBorder1: #10101F;
   --buttonBorder2: #2A2B2E99;
-  /*--buttonBackground: rgb(16, 16, 22);
-  --buttonGradient1: rgb(19, 19, 28);
-  --buttonGradient2: rgb(13, 13, 18);
-
-  --buttonBorder1: #10101F;
-  --buttonBorder2: rgba(42, 43, 46, 0.6);*/
   --borderRadius: 15px;
   --transition: 0.3s;
 }
@@ -553,8 +547,8 @@ input:focus, textarea:focus {
   height: 2rem;
 }
 
-.dark {
-  color: var(--unselectedColor);
+.theme-p {
+  color: color-mix(in srgb, var(--textColor) 50%, transparent);
 }
 
 #theme-options {
@@ -570,8 +564,9 @@ input:focus, textarea:focus {
 #theme-options div {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0;
 }
 #theme-options div > span {
   display: flex;
@@ -596,15 +591,42 @@ input:focus, textarea:focus {
   background: var(--accentColor);
 }
 
-#button-holder {
+#theme-mode {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  position: absolute;
-  bottom: 1rem;
-  right: 4rem;
+  margin-top: 1rem;
+}
+
+.submit-button {
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+.submit-button button {
+  width: 3rem;
+}
+
+#about-project p {
+  color: color-mix(in srgb, var(--textColor) 50%, transparent);
+}
+#about-project p i {
+  color: var(--textColor);
+}
+#about-project a {
+  color: var(--highlightColor);
+  text-decoration: none;
+  margin-right: 1rem;
+}
+#about-project a:hover {
+  color: color-mix(in srgb, var(--highlightColor) 50%, transparent);
 }
 
 /*# sourceMappingURL=settingsPage.css.map */

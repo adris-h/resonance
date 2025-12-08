@@ -22,9 +22,6 @@
           <a href="profile.html" class="profile-link">
               <span>profile</span>
           </a>
-          <a href="account.html" class="account-link">
-              <span>account</span>
-          </a>
           <a href="theme.html" class="theme-link">
               <span>themes</span>
           </a>
@@ -33,9 +30,6 @@
           </a>
 
           <h2>More Info</h2>
-          <a href="about-creator.html" class="creator-link">
-              <span>about creator</span>
-          </a>
           <a href="about-project.html" class="project-link">
               <span>about project</span>
           </a>
@@ -44,7 +38,7 @@
       <div class="settings-container">
           <div class="settings-container_wrapper">
               <h1>Theme Settings</h1>
-              <p class="dark">Because of time disadvantage I managed to make the app customizable only by changing three colors. I hope you understand and don't think I'm completely useless :3 </p>
+              <p class="theme-p">Because of time disadvantage I managed to make the app customizable only by changing three colors. I hope you understand and don't think I'm completely useless :3 </p>
               <div id="theme-options">
                   <div>
                       <h2 class="dark">Highlight Color</h2>
@@ -69,11 +63,20 @@
                   </div>
               </div>
               <div id="theme-mode">
-                <button id="dark-mode">dark</button>
-                <button id="light-mode">light</button>
+                <button id="dark-mode" class="outer active">
+                    <span class="inner">
+                        <i class="inner-text">dark mode</i>
+                    </span>
+                </button>
+                <button id="light-mode" class="outer">
+                    <span class="inner">
+                        <i class="inner-text">light mode</i>
+                    </span>
+                </button>
               </div>
           </div>
-         <span id="button-holder">
+      </div>
+      <span id="button-holder" class="submit-button">
               <button id="submit-theme" class="outer active">
                     <span class="inner">
                         <i class="inner-text">submit</i>
@@ -85,7 +88,6 @@
                         </span>
               </button>
          </span>
-      </div>
       <div class="user-profile">
           <a class="menu_button"><span id="user-profile" class="unselectable user-profile-picture">u</span></a>
           <menu class=user-profile_menu>

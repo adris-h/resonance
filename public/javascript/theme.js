@@ -21,6 +21,10 @@ applyThemeColors();
 
 let themeMode = getCookie('themeMode') || 'dark-mode';
 
+const darkMode = document.getElementById("dark-mode");
+const lightMode = document.getElementById("light-mode");
+let darkModeActive = true;
+
 if (themeMode === 'dark-mode') {
     setDarkMode();
 } else if (themeMode === 'light-mode') {
@@ -177,8 +181,7 @@ function applyThemeColors() {
         hexCode3.innerHTML = accentColorDarker;
     }
 }
-const darkMode = document.getElementById("dark-mode");
-const lightMode = document.getElementById("light-mode");
+
 
 if(darkMode && lightMode){
     darkMode.addEventListener("click", async () => {
@@ -189,6 +192,8 @@ if(darkMode && lightMode){
 
         setCookie("themeMode", "dark-mode");
 
+        darkModeActive = true;
+
         await setDoc(doc(db, "users", user.uid, "themes", "mode"), {
             theme: "dark-mode",
         }, { merge: true });
@@ -196,19 +201,15 @@ if(darkMode && lightMode){
 
     lightMode.addEventListener("click", async() => {
         setLightMode()
-
         setCookie("themeMode", "light-mode");
-        console.log(getCookie("themeMode"))
-        console.log("clicked")
+
+        darkModeActive = false;
 
         await setDoc(doc(db, "users", user.uid, "themes", "mode"), {
             theme: "light-mode",
         }, { merge: true });
     })
 }
-
-
-console.log(getCookie("themeMode"));
 
 
 function setDarkMode() {
@@ -229,6 +230,11 @@ function setDarkMode() {
     let buttonTextColor = '#33333b'
 
     setMode(bcgColor, textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor);
+
+    if (darkMode || lightMode) {
+        darkMode.classList.add("active");
+        lightMode.classList.remove("active");
+    }
 }
 
 function setLightMode() {
@@ -247,8 +253,13 @@ function setLightMode() {
 
     let activeButtonColor = '#dfd2b9'
     let buttonTextColor = '#0c0c0f'
-
     setMode(bcgColor,textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor);
+
+    if (darkMode || lightMode) {
+        darkMode.classList.remove("active");
+        lightMode.classList.add("active");
+    }
+
 }
 
 function setMode(bcgColor, textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor) {

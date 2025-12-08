@@ -121,10 +121,6 @@ fileSubmitButton.addEventListener('click', e => {
     if(audioName.value.length !== 0 && audioArtist.value.length !== 0){
         window.currentSong = fileInput.files[0];
         console.log("current song: ", window.currentSong);
-        /*
-            console.log(audioName);
-            console.log(audioArtist);*/
-
         currentSource.audio.src = fileURL;
         currentSource.songPlaying.innerHTML = audioName.value;
         currentSource.artist.innerHTML = audioArtist.value;
@@ -135,6 +131,13 @@ fileSubmitButton.addEventListener('click', e => {
 
         currentSource.songCover.style.backgroundImage = 'none';
         currentSource.songCover.style.backgroundColor = '#fff';
+
+        if(currentSource.id === 1 && window.wavesurfer1) {
+            window.wavesurfer1.load(currentSource.audio.src);
+        }
+        if(currentSource.id === 2 && window.wavesurfer2) {
+            window.wavesurfer2.load(currentSource.audio.src);
+        }
 
         setImportState(false);
     } else{

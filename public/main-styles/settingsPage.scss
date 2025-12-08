@@ -224,22 +224,22 @@ input, textarea{
 }
 
 
-.dark{
-  color: $unselectedColor;
+
+.theme-p{
+  color: color-mix(in srgb, var(--textColor) 50%, transparent);
 }
-
-
 
 #theme-options{
   @include flex(row, flex-start, center, 2rem);
 
+
+
   h2{
     font-size: 1rem;
-
   }
 
   div{
-    @include flexcenter(column);
+    @include flex(column, flex-start, flex-start, 0);
     & > span{
       @include flexcenter(row);
       gap: 1rem;
@@ -265,9 +265,39 @@ input, textarea{
   }
 }
 
-#button-holder{
+
+#theme-mode{
   @include flex(row, flex-start, center, 1rem);
-  position: absolute;
-  bottom: 1rem;
-  right: 4rem;
+  margin-top: 1rem;
+}
+
+.submit-button{
+  position: fixed;
+  right: 3rem;
+  bottom: 3rem;
+  @include flex(row, flex-start, center, 1rem);
+
+  button{
+    width: 3rem;
+  }
+}
+
+#about-project{
+  p{
+    color: color-mix(in srgb, var(--textColor) 50%, transparent);
+
+    i{
+      color: var(--textColor);
+    }
+  }
+
+  a{
+    color: var(--highlightColor);
+    text-decoration: none;
+    margin-right: 1rem;
+
+    &:hover{
+      color: color-mix(in srgb, var(--highlightColor) 50%, transparent);
+    }
+  }
 }

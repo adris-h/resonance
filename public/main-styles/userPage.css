@@ -17,12 +17,6 @@
   --buttonText: #33333b;
   --buttonBorder1: #10101F;
   --buttonBorder2: #2A2B2E99;
-  /*--buttonBackground: rgb(16, 16, 22);
-  --buttonGradient1: rgb(19, 19, 28);
-  --buttonGradient2: rgb(13, 13, 18);
-
-  --buttonBorder1: #10101F;
-  --buttonBorder2: rgba(42, 43, 46, 0.6);*/
   --borderRadius: 15px;
   --transition: 0.3s;
 }
@@ -270,13 +264,13 @@ section #user-search #user-search-result {
   border-radius: 0.5rem;
   opacity: 0;
   visibility: hidden;
-  background: linear-gradient(to top, rgb(11, 11, 11), rgb(15, 15, 15));
+  background: var(--bcgColor);
   box-shadow: 0 0 10px rgba(74, 74, 74, 0);
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  border: 1px solid color-mix(in srgb, var(--textColor) 20%, transparent);
   transition: 300ms;
 }
 section #user-search #user-search-result:hover {
-  background: linear-gradient(to top, rgba(11, 11, 11, 0.8), rgba(15, 15, 15, 0.8));
+  background: color-mix(in srgb, var(--bcgColor) 50%, transparent);
   box-shadow: 0 0 20px rgba(74, 74, 74, 0.4);
 }
 section #user-search #user-search-result.active {
@@ -292,16 +286,16 @@ section #user-search #user-search-result #user-search-avatar {
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
-  color: black;
+  color: var(--textColor);
   font-size: 1.5vw;
   text-transform: uppercase;
   border-radius: var(--borderRadius);
 }
 section #user-search #user-search-input {
-  color: white;
+  color: var(--textColor);
   background-color: transparent;
   border: none;
-  border-bottom: white solid 1px;
+  border-bottom: var(--textColor) solid 1px;
   width: 20%;
 }
 section #user-search #user-search-input:focus {
@@ -374,7 +368,7 @@ section #post-buttons #posts-button, section #post-buttons #posts-button .inner 
   border-top-left-radius: var(--borderRadius);
   border-bottom-left-radius: var(--borderRadius);
 }
-section #post-buttons #like-button, section #post-buttons #like-button .inner {
+section #post-buttons #likes-button, section #post-buttons #likes-button .inner {
   border-top-right-radius: var(--borderRadius);
   border-bottom-right-radius: var(--borderRadius);
 }
@@ -426,7 +420,7 @@ section #profile-posts .preset .preset-showcase, section #profile-likes .preset 
 section #profile-posts .preset .preset-showcase > span, section #profile-likes .preset .preset-showcase > span {
   height: 60%;
   width: 0.2vw;
-  background: #1f1f1f;
+  background: var(--barelyVisible);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -451,51 +445,6 @@ section #profile-posts .preset .preset-name, section #profile-likes .preset .pre
   justify-content: space-between;
   align-items: center;
   gap: 0;
-  /*span:nth-child(2){
-    font-size: 1.5rem;
-
-    .preset-settings{
-      position: absolute;
-      right: 2rem;
-      width: fit-content + 1rem;
-      height: 5vw;
-      bottom: 0;
-      background: var(--bcgColor);
-      opacity: 0;
-      visibility: hidden;
-      transition: 300ms;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.09);
-
-      padding: 0 1rem;
-      box-sizing: border-box;
-      @include flex(column, center, flex-end, 0);
-
-      a{
-        font-size: 1rem;
-        transition: 300ms;
-      }
-
-      .delete-preset-button{
-        &:hover{
-          color: red;
-        }
-      }
-
-      .edit-preset-button, .like-preset-button, .save-preset-button{
-        &:hover{
-          color: $highlightColor;
-        }
-      }
-    }
-
-    &:hover{
-      .preset-settings{
-        opacity: 1;
-        visibility: visible;
-      }
-    }
-  }*/
 }
 section #profile-posts .preset .preset-name button, section #profile-likes .preset .preset-name button {
   cursor: pointer;
@@ -593,7 +542,8 @@ section #user-container #profile-info #profile-bio {
   color: var(--unselectedColor);
   text-align: left;
 }
-section #delete-preset-container {
+
+#delete-preset-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -614,13 +564,78 @@ section #delete-preset-container {
   align-items: center;
   transition: 300ms;
 }
-section #delete-preset-container.active {
+#delete-preset-container .outer {
+  cursor: pointer;
+  height: 1.8em;
+  border: none;
+  background: linear-gradient(to top, var(--buttonBorder1) 0%, var(--buttonBorder2) 100%);
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--textColor);
+  transition: var(--transition);
+}
+#delete-preset-container .outer:hover {
+  box-shadow: rgba(255, 255, 255, 0.09) 0 0 30px;
+}
+#delete-preset-container .outer:hover .inner-text {
+  color: color-mix(in srgb, var(--activeButtonText) 100%, transparent);
+}
+#delete-preset-container .outer .inner {
+  width: 98%;
+  height: 93%;
+  transition: var(--transition);
+  padding: 0 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  /*background: rgb(16, 16, 22);
+  background: linear-gradient(179deg, rgb(19, 19, 28) 0%, rgb(13, 13, 18) 100%);*/
+  background: var(--buttonBackground);
+  background: linear-gradient(179deg, var(--buttonGradient1) 0%, var(--buttonGradient2) 100%);
+}
+#delete-preset-container .outer .inner .inner-text {
+  font-style: normal;
+  transition: var(--transition);
+  color: var(--buttonText);
+}
+#delete-preset-container .outer.active {
+  z-index: 3;
+}
+#delete-preset-container .outer.active .inner {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
+  box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
+}
+#delete-preset-container .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
+  transform: scale(0.9);
+}
+#delete-preset-container span {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+#delete-preset-container span button {
+  cursor: pointer;
+  width: 3rem;
+}
+#delete-preset-container span .outer, #delete-preset-container span .inner {
+  border-radius: 10px;
+}
+#delete-preset-container.active {
   visibility: visible;
   opacity: 1;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%) scale(1);
-}
-section #delete-preset-container button {
-  cursor: pointer;
 }
 
 .user-wrapper {
@@ -634,7 +649,6 @@ section #delete-preset-container button {
 }
 .user-wrapper h1 {
   margin: 0;
-  font-family: atelier;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
 }
 .user-wrapper #continue-button {
@@ -656,7 +670,6 @@ section #delete-preset-container button {
   left: 50%;
   transform: translate(-50%, -50%) scale(0.4);
   transition: 300ms;
-  opacity: 1;
   background: rgba(0, 0, 0, 0.14);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(15.6px);
@@ -710,17 +723,17 @@ section #delete-preset-container button {
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.13);
+  border: 1px solid color-mix(in srgb, var(--textColor) 10%, transparent);
   border-radius: 0.5rem;
   padding: 1rem;
   width: 80%;
-  background: linear-gradient(to top, rgb(11, 11, 11), rgb(15, 15, 15));
+  background: color-mix(in srgb, var(--bcgColor) 80%, transparent);
   box-shadow: 0 0 10px rgba(74, 74, 74, 0);
   transition: 300ms;
 }
 #following-container #following-list .followed-user:hover {
-  background: linear-gradient(to top, rgba(11, 11, 11, 0.8), rgba(15, 15, 15, 0.8));
-  box-shadow: 0 0 20px rgba(74, 74, 74, 0.4);
+  background: color-mix(in srgb, var(--bcgColor) 50%, transparent);
+  box-shadow: 0 0 20px rgba(74, 74, 74, 0.2);
 }
 #following-container #following-list .followed-user-avatar {
   width: 2rem;

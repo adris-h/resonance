@@ -52,6 +52,55 @@ const sources = [
 ];
 
 
+
+const r = getComputedStyle(document.documentElement);
+const highlightColor = r.getPropertyValue('--highlightColor');
+const barelyVisible = r.getPropertyValue('--barelyVisible');
+
+const wavesurfer1 = WaveSurfer.create({
+    container: '#waveform1',
+    media: sources[0].audio,
+    waveColor: `${barelyVisible}`,
+    progressColor: `${highlightColor}`,
+    height: 150
+});
+
+const wavesurfer2 = WaveSurfer.create({
+    container: '#waveform2',
+    media: sources[1].audio,
+    waveColor: `${barelyVisible}`,
+    progressColor: `${highlightColor}`,
+    height: 150
+});
+
+const waveformContainer = document.getElementById('waveform-container');
+const waveformButtons = document.querySelectorAll('.waveform-button');
+
+const waveform1 = document.querySelector('#waveform1');
+const waveform2 = document.querySelector('#waveform2');
+
+if (waveformButtons) {
+    waveformButtons.forEach(waveformButton => {
+        waveformButton.addEventListener('click', (e) => {
+            waveformContainer.classList.add('active');
+        });
+    })
+}
+
+document.addEventListener('click', e => {
+    if (!waveformContainer.classList.contains('active')) return;
+
+    const clickedInside =
+        waveform1.contains(e.target) ||
+        waveform2.contains(e.target) ||
+        Array.from(waveformButtons).some(btn => btn.contains(e.target));
+
+    if (!clickedInside) {
+        waveformContainer.classList.remove('active');
+    }
+});
+
+
 // při zmeně tempa se musí změnit i výška tónu tak funguje většina DJ kontroleru
 sources.forEach(source => {
     source.audio.preservesPitch = false;
@@ -507,6 +556,7 @@ function updateSong(songKey, chosenAudio){
         sources[0].vinyl.style.backgroundImage = `url(${song.cover})`;
         sources[0].bpm.innerHTML = song.bpm;
         sources[0].originalBPM = parseInt(song.bpm);
+
     } else if (chosenAudio === 'audio2') {
         // aktualizace informací pro druhý audio zdroj
         sources[1].audio.src = song.src;
@@ -515,7 +565,12 @@ function updateSong(songKey, chosenAudio){
         sources[1].vinyl.style.backgroundImage = `url(${song.cover})`;
         sources[1].bpm.innerHTML = song.bpm;
         sources[1].originalBPM = parseInt(song.bpm);
+
     }
+    wavesurfer1.load(sources[0].audio.src);
+    wavesurfer2.load(sources[1].audio.src);
+    window.wavesurfer1 = wavesurfer1;
+    window.wavesurfer2 = wavesurfer2;
 
     sources.forEach(source => {
         audioSource = source.audio;
@@ -542,6 +597,20 @@ sources.forEach(source => {
 
 // nastavení animace rotace při přehrávání a pozastavení
 sources.forEach(source => {
+
+    function updateRotation() {
+        source.vinyl.style.transform = source.songCover.classList.contains('vinyl')
+            ? `rotate(${source.currentRotation}deg)`
+            : `rotate(0deg)`;
+    }
+
+    function rotateVinyl() {
+        if (!source.audio.paused) {
+            source.currentRotation += 0.3;
+            updateRotation();
+            source.rotationFrame = requestAnimationFrame(rotateVinyl);
+        }
+    }
 
     // spuštění rotace při přehrávání
     source.audio.addEventListener('play', () => {
@@ -635,11 +704,6 @@ if (vinyl && vinyl.classList.contains('vinyl')) {
     });
 }*/
 
-
-
-
-
-
 // nastavení event listenerů pro každý zdroj
 sources.forEach(source => {
 
@@ -676,7 +740,7 @@ sources.forEach(source => {
     }
 
     // animatční funkce pro rotaci vinylu
-    function rotateVinyl() {
+    function rotateVinyl(source) {
         if (!source.audio.paused) {
             source.currentRotation += 0.3;
             updateRotation();

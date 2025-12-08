@@ -56,14 +56,14 @@ section{
       opacity: 0;
       visibility: hidden;
 
-      background: linear-gradient(to top, rgb(11, 11, 11), rgb(15, 15, 15));
+      background: var(--bcgColor);
       box-shadow: 0 0 10px rgba(74, 74, 74, 0);
 
-      border: 1px solid rgba(255, 255, 255, 0.13);
+      border: 1px solid color-mix(in srgb, var(--textColor) 20%, transparent);
 
       transition: 300ms;
       &:hover{
-        background: linear-gradient(to top, rgba(11, 11, 11, 0.8), rgba(15, 15, 15, 0.8));
+        background: color-mix(in srgb, var(--bcgColor) 50%, transparent);
         box-shadow: 0 0 20px rgba(74, 74, 74, 0.4);
       }
 
@@ -80,7 +80,7 @@ section{
 
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
 
-        color: black;
+        color: var(--textColor);
         font-size: $normalSize;
         text-transform: uppercase;
 
@@ -91,10 +91,10 @@ section{
     }
 
     #user-search-input{
-      color: white;
+      color: var(--textColor);
       background-color: transparent;
       border: none;
-      border-bottom: white solid 1px;
+      border-bottom: var(--textColor) solid 1px;
       width: 20%;
 
 
@@ -118,7 +118,7 @@ section{
         border-top-left-radius: var(--borderRadius);
         border-bottom-left-radius: var(--borderRadius);
     }
-    #like-button, #like-button .inner{
+    #likes-button, #likes-button .inner{
         border-top-right-radius: var(--borderRadius);
         border-bottom-right-radius: var(--borderRadius);
     }
@@ -168,7 +168,7 @@ section{
         & > span{
           height: 60%;
           width: .2vw;
-          background: #1f1f1f;
+          background: var(--barelyVisible);
           @include flex(row, center, flex-end, 0);
           span{
             height: 4%;
@@ -190,51 +190,6 @@ section{
 
         @include flex(row, space-between, center, 0);
 
-        /*span:nth-child(2){
-          font-size: 1.5rem;
-
-          .preset-settings{
-            position: absolute;
-            right: 2rem;
-            width: fit-content + 1rem;
-            height: 5vw;
-            bottom: 0;
-            background: var(--bcgColor);
-            opacity: 0;
-            visibility: hidden;
-            transition: 300ms;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.09);
-
-            padding: 0 1rem;
-            box-sizing: border-box;
-            @include flex(column, center, flex-end, 0);
-
-            a{
-              font-size: 1rem;
-              transition: 300ms;
-            }
-
-            .delete-preset-button{
-              &:hover{
-                color: red;
-              }
-            }
-
-            .edit-preset-button, .like-preset-button, .save-preset-button{
-              &:hover{
-                color: $highlightColor;
-              }
-            }
-          }
-
-          &:hover{
-            .preset-settings{
-              opacity: 1;
-              visibility: visible;
-            }
-          }
-        }*/
         button{
           cursor: pointer;
           background: none;
@@ -325,38 +280,54 @@ section{
     }
   }
 
-  #delete-preset-container{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(.5);
-    z-index: 100000;
 
-    background: rgba(0, 0, 0, 0.14);
-    box-shadow: 0 4px 30px rgba(150, 150, 150, 0.1);
-    backdrop-filter: blur(15.6px);
-    border: 1px solid rgba(123, 123, 123, 0.16);
-    border-radius: 15px;
-    width: 20vw;
-    height: 20vh;
+}
 
-    visibility: hidden;
-    opacity: 0;
+#delete-preset-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(.5);
+  z-index: 100000;
 
-    @include flexcenter(column);
+  background: rgba(0, 0, 0, 0.14);
+  box-shadow: 0 4px 30px rgba(150, 150, 150, 0.1);
+  backdrop-filter: blur(15.6px);
+  border: 1px solid rgba(123, 123, 123, 0.16);
+  border-radius: 15px;
+  width: 20vw;
+  height: 20vh;
 
-    transition: 300ms;
+  visibility: hidden;
+  opacity: 0;
 
-    &.active{
-      visibility: visible;
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
+  @include flexcenter(column);
+  @include button;
+
+
+  transition: 300ms;
+
+  span{
+    @include flexcenter(row);
+    gap: 1rem;
+
     button{
       cursor: pointer;
-
+      width: 3rem;
+    }
+    .outer, .inner{
+      border-radius: 10px;
     }
   }
+
+  &.active{
+    visibility: visible;
+    opacity: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
 }
 
 
@@ -368,7 +339,6 @@ section{
   gap: 1rem;
   h1{
     margin: 0;
-    font-family: atelier;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.28);
   }
   #continue-button{
@@ -392,7 +362,6 @@ section{
   left: 50%;
   transform: translate(-50%, -50%) scale(.4);
   transition: 300ms;
-  opacity: 1;
   background: rgba(0, 0, 0, 0.14);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(15.6px);
@@ -435,17 +404,17 @@ section{
     transition: 300ms;
     .followed-user{
       @include flex(row, flex-start, center,  1rem);
-      border: 1px solid rgba(255, 255, 255, 0.13);
+      border: 1px solid color-mix(in srgb, var(--textColor) 10%, transparent);
       border-radius: 0.5rem;
       padding: 1rem;
       width: 80%;
 
-      background: linear-gradient(to top, rgb(11, 11, 11), rgb(15, 15, 15));
+      background: color-mix(in srgb, var(--bcgColor) 80%, transparent);
       box-shadow: 0 0 10px rgba(74, 74, 74, 0);
       transition: 300ms;
       &:hover{
-        background: linear-gradient(to top, rgba(11, 11, 11, 0.8), rgba(15, 15, 15, 0.8));
-        box-shadow: 0 0 20px rgba(74, 74, 74, 0.4);
+        background: color-mix(in srgb, var(--bcgColor) 50%, transparent);
+        box-shadow: 0 0 20px rgba(74, 74, 74, 0.2);
       }
       &-avatar{
         width: 2rem;

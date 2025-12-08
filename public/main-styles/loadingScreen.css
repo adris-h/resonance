@@ -13,7 +13,8 @@
   }
 }
 #loading-screen {
-  background: black;
+  background: var(--bcgColor);
+  color: var(--textColor);
   position: fixed;
   z-index: 1000000;
   top: 0;

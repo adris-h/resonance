@@ -16,66 +16,61 @@
     <script defer src="../javascript/theme.js" type="module"></script>
 </head>
 <body>
-<nav>
-    <a href="../main.html"> < to main</a>
-</nav>
-<main id="main-content">
+    <nav>
+        <a href="../main.html"> < to main</a>
+    </nav>
+    <main id="main-content">
 
-    <div class="settings-nav">
-        <h2>Settings</h2>
-        <a class="profile-link">
-            <span>profile</span>
-        </a>
-        <a href="account.html" class="account-link">
-            <span>account</span>
-        </a>
-        <a href="theme.html" class="theme-link">
-            <span>themes</span>
-        </a>
-        <a href="keybinds.html" class="key-link">
-            <span>keybinds</span>
-        </a>
-        <h2>More Info</h2>
-        <a href="about-creator.html" class="creator-link">
-            <span>about creator</span>
-        </a>
-        <a href="about-project.html" class="project-link">
-            <span>about project</span>
-        </a>
-    </div>
-    <div class="settings-container" id="profile-container">
-        <div class="settings-container_wrapper">
-            <h1>Profile Settings</h1>
-            <div class="edit-profile">
-                <div class="username-input">
-                    <h2>Username</h2>
-                    <input type="text" name="username" id="edit-username">
+        <div class="settings-nav">
+            <h2>Settings</h2>
+            <a class="profile-link">
+                <span>profile</span>
+            </a>
+            <a href="theme.html" class="theme-link">
+                <span>themes</span>
+            </a>
+            <a href="keybinds.html" class="key-link">
+                <span>keybinds</span>
+            </a>
+            <h2>More Info</h2>
+            <a href="about-project.html" class="project-link">
+                <span>about project</span>
+            </a>
+        </div>
+        <div class="settings-container" id="profile-container">
+            <div class="settings-container_wrapper">
+                <h1>Profile Settings</h1>
+                <div class="edit-profile">
+                    <div class="username-input">
+                        <h2>Username</h2>
+                        <input type="text" name="username" id="edit-username">
+                    </div>
+                    <div class="bio-input">
+                        <h2>Bio</h2>
+                        <textarea  maxlength="120" id="bioInput"></textarea>
+                    </div>
+                    <div class="color-input">
+                        <h2>Profile Avatar Color</h2>
+                        <span><span id="color-cell"></span><span id="hex-code">#00000</span></span>
+                    </div>
+
                 </div>
-                <div class="bio-input">
-                    <h2>Bio</h2>
-                    <textarea  maxlength="120" id="bioInput"></textarea>
-                </div>
-                <div class="color-input">
-                    <h2>Profile Avatar Color</h2>
-                    <span><span id="color-cell"></span><span id="hex-code">#00000</span></span>
-                </div>
-                <button id="submit-username" class="outer active">
-                    <span class="inner">
-                        <i class="inner-text">submit</i>
-                    </span>
-                </button>
             </div>
         </div>
-    </div>
-    <div class="user-profile">
-        <a class="menu_button"><span id="user-profile" class="unselectable user-profile-picture">u</span></a>
-        <menu class=user-profile_menu>
-            <a href="../user.html">Your Profile</a>
-            <a href="keybinds.html"> Keybinds </a>
-            <a href="profile.html">Settings</a>
-            <a href="../../index.html" id="sign-out-button">Sign Out</a>
-        </menu>
-    </div>
-</main>
+        <button id="submit-username" class="outer active submit-button">
+            <span class="inner">
+                <i class="inner-text">submit</i>
+            </span>
+        </button>
+        <div class="user-profile">
+            <a class="menu_button"><span id="user-profile" class="unselectable user-profile-picture">u</span></a>
+            <menu class=user-profile_menu>
+                <a href="../user.html">Your Profile</a>
+                <a href="keybinds.html"> Keybinds </a>
+                <a href="profile.html">Settings</a>
+                <a href="../../index.html" id="sign-out-button">Sign Out</a>
+            </menu>
+        </div>
+    </main>
 </body>
 </html>

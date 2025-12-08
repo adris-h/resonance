@@ -215,6 +215,10 @@ nav{
       }
     }
 
+    label{
+      color: white;
+    }
+
     #song-import-submit{
       width: 100%;
       @include button();
@@ -553,7 +557,7 @@ nav{
             width: 100%;
             height: 100%;
             @include flex(row, space-between, space-around, 0);
-            color: color-mix(in srgb, var(--barelyVisible) 70%, black);
+            color: color-mix(in srgb, var(--textColor) 50%, transparent);
           }
 
           input[type="range"] {
@@ -1527,6 +1531,10 @@ select, button, input{
       cursor: pointer;
       width: 6rem;
       border-radius: 10px;
+
+      & .inner{
+        border-radius: 10px;
+      }
     }
 
     & > span{
@@ -1553,10 +1561,10 @@ select, button, input{
       width: 70%;
 
       input:not(input[type="file"]){
-        color: white;
+        color: var(--textColor);
         background-color: transparent;
         border: none;
-        border-bottom: white solid 1px;
+        border-bottom: var(--textColor) solid 1px;
         width: 100%;
 
         &:focus{
@@ -1579,3 +1587,35 @@ svg{
   }
 }
 
+
+#waveform-container{
+ // background: var(--bcgColor);
+  visibility: hidden;
+  opacity: 0;
+  @include flexcenter(column);
+  gap: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  bottom: 0;
+  left: 0;
+  z-index: -1000;
+  transition: 300ms;
+
+  backdrop-filter: blur(10px);
+
+  &.active{
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+
+  }
+  p{
+    color: color-mix(in srgb, var(--textColor) 50%, transparent);
+  }
+  div{
+    height: 20%;
+    width: 95% ;
+    @include flexcenter(row);
+  }
+}
