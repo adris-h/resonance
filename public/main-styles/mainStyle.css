@@ -444,6 +444,68 @@ nav {
   color: var(--textColor);
   cursor: pointer;
 }
+#main .song-import-wrapper #song-import-submit {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#main .song-import-wrapper #song-import-submit .outer {
+  cursor: pointer;
+  height: 1.8em;
+  border: none;
+  background: linear-gradient(to top, var(--buttonBorder1) 0%, var(--buttonBorder2) 100%);
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--textColor);
+  transition: var(--transition);
+}
+#main .song-import-wrapper #song-import-submit .outer:hover {
+  box-shadow: rgba(255, 255, 255, 0.09) 0 0 30px;
+}
+#main .song-import-wrapper #song-import-submit .outer:hover .inner-text {
+  color: color-mix(in srgb, var(--activeButtonText) 100%, transparent);
+}
+#main .song-import-wrapper #song-import-submit .outer .inner {
+  width: 98%;
+  height: 93%;
+  transition: var(--transition);
+  padding: 0 0.5em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  /*background: rgb(16, 16, 22);
+  background: linear-gradient(179deg, rgb(19, 19, 28) 0%, rgb(13, 13, 18) 100%);*/
+  background: var(--buttonBackground);
+  background: linear-gradient(179deg, var(--buttonGradient1) 0%, var(--buttonGradient2) 100%);
+}
+#main .song-import-wrapper #song-import-submit .outer .inner .inner-text {
+  font-style: normal;
+  transition: var(--transition);
+  color: var(--buttonText);
+}
+#main .song-import-wrapper #song-import-submit .outer.active {
+  z-index: 3;
+}
+#main .song-import-wrapper #song-import-submit .outer.active .inner {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--highlightColor) 0%, var(--accentColor) 56%, var(--accentColor) 100%);
+  box-shadow: color-mix(in srgb, var(--accentColor) 50%, black) 0 0 30px;
+}
+#main .song-import-wrapper #song-import-submit .outer.active .inner .inner-text {
+  color: var(--activeButtonText);
+  transform: scale(0.9);
+}
+#main .song-import-wrapper #song-import-submit .file-submit, #main .song-import-wrapper #song-import-submit .file-submit .inner {
+  border-radius: 10px;
+}
 #main .song-import-wrapper div {
   display: flex;
   flex-direction: column;

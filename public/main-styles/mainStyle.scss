@@ -215,6 +215,15 @@ nav{
       }
     }
 
+    #song-import-submit{
+      width: 100%;
+      @include button();
+      @include flexcenter(row);
+      .file-submit, .file-submit .inner{
+        border-radius: 10px;
+      }
+    }
+
     div{
       @include flex(column, center, flex-start, 2rem);
       height: 80%;
@@ -242,11 +251,15 @@ nav{
         cursor: pointer;
       }
 
+
+
+
       & > span{
         @include flexcenter(row);
         width: 100%;
         gap: 1rem;
         @include button();
+
 
         span{
           @include flexcenter(row);
