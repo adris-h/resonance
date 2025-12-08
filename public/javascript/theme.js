@@ -246,7 +246,7 @@ function setLightMode() {
     let buttonBorder2 = '#dfd2b9'
 
     let activeButtonColor = '#dfd2b9'
-    let buttonTextColor = '#0c0c0f'
+    let buttonTextColor = '#FAF3E1'
 
     setMode(bcgColor,textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor);
 }
