@@ -16,7 +16,7 @@ import { getFirestore, getDoc, setDoc, doc, collection } from "https://www.gstat
 
 
 
-// firebase configuration
+// konfigurace Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyCStdq2XovV_DxXknQCCHsRELFoeeFC-Yw",
     authDomain: "klauzury2025.firebaseapp.com",
@@ -27,14 +27,16 @@ const firebaseConfig = {
     measurementId: "G-HQ3GTYZS9J",
 }
 
+// initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+
+
+localStorage.setItem("cookies", "true");
+
 const signInPage = "index.html";
-const userPage = "user.html";
 let currentPage = window.location.pathname
-
-function relocateToUserPage(){
-    window.location.href = mainPage;
-
-}
 
 function relocateToSignInPage(){
     window.location.href = signInPage;
@@ -44,61 +46,56 @@ function relocateToMainPage(mainPage){
     window.location.href = mainPage;
 }
 
-window.onload = () => {
-    console.log("current page:", currentPage);
-};
 
-// initialize Firebase
-const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
-
-const auth = getAuth(app);
-
-localStorage.setItem("cookies", "true");
-
+// funkce pro vytvoreni uctu
 function signUp(){
-    // CREATE NEW USER
+    // ziskani emailu, hesla a username z inputu
     const email = emailInput.value;
     const password = passwordInput.value;
     const username = document.getElementById("username-input").value;
+
+    // vytvoreni noveho uzivatele v Firebase Auth
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // --------- user created
-            const user = userCredential.user;
 
+            const user = userCredential.user;
+            // nastaveni uzivatelskeho jmena
             return updateProfile(user, {
                 displayName: username
             }).then(() => {
+                // vytvoreni dokumentu ve Firestore databazi pro uzivatele
                 return setDoc(doc(db, "users", user.uid), {
                     displayName: user.displayName,
-                    bio: ""
+                    bio: "" // nazacatku prazdny bio
                 });
             }).then(() => {
-                console.log("User signed up:", user.uid, "Username:", user.displayName);
+                //presmerovani uzivatele do mainu
                 relocateToMainPage("main.html");
             });
         })
         .catch((error) => {
+            // kdyz se neco pokazi, "chyti" se error
             const errorCode = error.code;
             const errorMessage = error.code;
             console.error("Sign up error:", errorCode, errorMessage);
+            // zobrazi chybu uzivatel
             displayError(errorCode);
         });
-
-
 }
 
+// funkce pro prihlaseni
 function signIn(){
-    // SIGN IN EXISTING USER
+    // ziskani informaci z inputu
     const email = emailInput.value;
     const password = passwordInput.value;
+
+    // prihlaseni uzivatele v Firebase Auth
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // ----------- user signed in
             const user = userCredential.user;
-            console.log("User signed in:", user.uid);
             relocateToMainPage("public/main.html");
         })
+        // jeslti nastala chyba tak se zobrazi v cem je chyba
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.code;
@@ -106,7 +103,7 @@ function signIn(){
             displayError(errorCode);
         });
 }
-
+// funkce pro odhlaseni uzivatele
 function signingOut(){
     signOut(auth).then(() => {
         console.log("Signed out successfully");

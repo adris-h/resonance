@@ -517,8 +517,6 @@ function updateSong(songKey, chosenAudio){
         sources[1].originalBPM = parseInt(song.bpm);
     }
 
-
-
     sources.forEach(source => {
         audioSource = source.audio;
 

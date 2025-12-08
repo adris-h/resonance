@@ -328,7 +328,6 @@ function changeSource(activeBtn, inactiveBtn, activeEq, inactiveEq){
         inactiveEq.classList.add('hidden');
         activeEq.classList.remove('hidden');
     }
-
 }
 
 
@@ -351,7 +350,6 @@ sc2.addEventListener('click', () => {
 });
 
 document.addEventListener('keypress', (e) => {
-
     if (getImportState()) {
         console.log("cant use shortcuts");
         return;
@@ -440,7 +438,6 @@ presetSaveButtons.forEach((button) => {
 
         const count = Object.keys(userPresets).length;
         presetSaveNameInput.value = "preset" + (count + 1);
-
 
     })
 })
