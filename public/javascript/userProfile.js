@@ -30,7 +30,6 @@ onAuthStateChanged(auth, (user) => {
         return;
     }
     usernameInput.value = user.displayName ;
-
     // update username and bio on click of submit button
     usernameSubmit.addEventListener('click', async () => {
         // get what user wrote in bio input
@@ -74,8 +73,6 @@ onAuthStateChanged(auth, (user) => {
                 bioInput.innerText = "";
             }
         })
-
-
 });
 
 

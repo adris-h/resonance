@@ -31,13 +31,15 @@ if (themeMode === 'dark-mode') {
     setLightMode();
 }
 
+// ziská prihlaseneho uzivatele
 onAuthStateChanged(auth, async (user) => {
+    // pokud je prihlasen
     if (user) {
         try {
+            // ziska dva dokumenty s firestore
             const themeDoc = await getDoc(doc(db, "users", user.uid, "themes", "currentTheme"));
             const themeModeDoc = await getDoc(doc(db, "users", user.uid, "themes", "themeMode"));
-
-
+            // pokud uz ma uzivatel ulozene barvy tak je ziska a aplikuje
             if (themeDoc.exists()) {
                 const themeData = themeDoc.data();
                 highlightColor = themeData.highlightColor || '#66d1ff';
@@ -108,7 +110,6 @@ onAuthStateChanged(auth, async (user) => {
     }
 });
 if(colorCell2 && colorCell && colorCell3){
-
     colorCell.addEventListener('click', () => {
         const picker = new ColorPicker(colorCell, {
             submitMode: 'instant',
@@ -259,7 +260,6 @@ function setLightMode() {
         darkMode.classList.remove("active");
         lightMode.classList.add("active");
     }
-
 }
 
 function setMode(bcgColor, textColor, barelyVisible, buttonBcg, buttonGrad1, buttonGrad2, buttonBorder1, buttonBorder2, activeButtonColor, buttonTextColor) {

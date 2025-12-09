@@ -169,7 +169,7 @@
     const customOption = document.querySelectorAll('.custom-eq');
     const resetBtn = document.querySelectorAll('.reset-eq');
 
-    // funkce pro aplikaci preddefinovaneho presetu na aktivni ekvalizer
+    // funkce pro aplikaci vlastnich presetu na aktivni ekvalizer
     function applyPreset(values) {
         for (const el of customOption) el.style.display = 'none';
         activeEQ.filters.forEach((filter, i) => {
@@ -186,7 +186,7 @@
         eqPresets.forEach(p => p.value = 'flat');
 
     }
-    // pridani event listeneru na tlacitka pro reset ekvalizeru
+    // funkce pro aplikaci preddefinovanych presetu na aktivni ekvalizer
     eqPresets.forEach(eqPreset => {
         eqPreset.addEventListener('change', () => {
             const presetValues = presets[eqPreset.value];

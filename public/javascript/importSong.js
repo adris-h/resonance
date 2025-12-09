@@ -80,22 +80,10 @@ importButton.addEventListener('click', e => {
         pauseSource(deck.audio, deck.playBtn);
     })
 })
-
-/*
-* importButton2.addEventListener('click', e => {
-    importFilePopUp.classList.remove('hidden');
-    sourceChosen = 2;
-    setImportState(true);
-})
-* */
-
 importCloseButton.addEventListener('click', e => {
     importFilePopUp.classList.add('hidden');
     setImportState(false);
 })
-
-
-
 
 const fileNameText = document.querySelector('.file-name');
 const fileInput = document.querySelector('#song-file-import');
@@ -105,22 +93,15 @@ let audioName, audioArtist, fileURL;
 fileInput.addEventListener('input', e => {
     let fileName = fileInput.files[0].name;
     fileNameText.innerHTML = fileName;
-    console.log("file name: ", fileName);
     audioName = document.querySelector('#import-song-name');
     audioArtist = document.querySelector('#import-artist-name');
     fileURL = URL.createObjectURL(fileInput.files[0]);
 });
-
-
-/*let songPlaying = document.querySelector('.song-name');
-let artist = document.querySelector('.artist-name');*/
-
 const fileSubmitButton = document.querySelector('.file-submit');
 
 fileSubmitButton.addEventListener('click', e => {
     if(audioName.value.length !== 0 && audioArtist.value.length !== 0){
         window.currentSong = fileInput.files[0];
-        console.log("current song: ", window.currentSong);
         currentSource.audio.src = fileURL;
         currentSource.songPlaying.innerHTML = audioName.value;
         currentSource.artist.innerHTML = audioArtist.value;
@@ -138,8 +119,6 @@ fileSubmitButton.addEventListener('click', e => {
         if(currentSource.id === 2 && window.wavesurfer2) {
             window.wavesurfer2.load(currentSource.audio.src);
         }
-
-        setImportState(false);
     } else{
         if(audioName.value.length === 0 && audioArtist.value.length === 0){
             audioName.classList.add('error');

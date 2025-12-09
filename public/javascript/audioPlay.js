@@ -781,9 +781,7 @@ sources.forEach(source => {
     })
 })
 
-// funkce pro aktualizaci pozadí slideru podle aktuální hodnoty - css je stupidní
-
-
+// funkce pro aktualizaci pozadí slideru podle aktuální hodnoty
 
 function updateSliderBackground(slider) {
     const min = Number(slider.min);
@@ -963,7 +961,6 @@ if(userBinds === "true"){
 }
 // aktualizace klávesových zkratek buď z výchozích nebo uživatelských
 function updateKeys(allKeys){
-
     // použití výchozích zkratek
     if(userBinds !== "true"){
         volumeTrack1 = allKeys["volumeTrack1"]

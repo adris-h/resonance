@@ -1,7 +1,9 @@
 const keybindButtons = document.querySelectorAll(".keybind-button");
 let activeButton = null;
 
+// prochazi vsemi buttony pro keybinds
 keybindButtons.forEach(button => {
+    // jakmile se button klikne tak se nastavi jako aktivni
     button.addEventListener("click", e => {
         if(button.classList.contains("active")) {
             button.classList.remove("active");
@@ -10,13 +12,11 @@ keybindButtons.forEach(button => {
             keybindButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
             activeButton = button;
-
-
         }
-        console.log(activeButton)
     })
 })
 
+// jestli uz je nejaky button aktivni a neni to ten na ktery se prave klika tak se odstrani s aktivnich tlaitek
 document.addEventListener('click', e => {
     if (activeButton !== null && !activeButton.contains(e.target)) {
         activeButton.classList.remove("active");
@@ -24,20 +24,24 @@ document.addEventListener('click', e => {
     }
 });
 
+// list s klavesy ktere nemuze uzivatel vyuizit
 let forbidden = ["1", "2", "3", "4", "7", "8", "9", "0", "O", "P"]
-
 let canSubmit = true;
 
+// event listern pro stisknuti klavesy
 document.addEventListener("keydown", e => {
+    // jestli je nejaky aktivni button
     if(activeButton !== null){
+        // konstanta ktera obsahuje atribut aktivniho tlacitka
         const action = activeButton.dataset.action;
+        // uvnitr tlacitka se vlozi text ktery odpovida klavese
         activeButton.innerText = (e.key).toUpperCase();
+        // pro klic ktery odpovida atributu tlacitka se nastavi kod klavesy
         user_keybinds[action] = e.code;
-
+        // funkce, ktera nastavuje texxt uvnitr tlacitka ( pro klavesy ktere se maji jinak napsane e.key)
         otherKeys(e, activeButton)
-
+        // promenna aktera obsahuje prave stisknute tlacitko
         let inputed = (e.key).toUpperCase();
-
         canSubmit = true
         keybindButtons.forEach(btn => {
             if(btn !== activeButton) {
@@ -45,7 +49,6 @@ document.addEventListener("keydown", e => {
                 if(inputed === btn.innerHTML || forbidden.includes(inputed)) {
                     canSubmit = false
                     activeButton.closest("div").querySelector("h2").style.color = "red";
-
                 }
             }
         });
@@ -132,8 +135,6 @@ let userBinds = false;
 if (submitBtn && resetBtn) {
     submitBtn.addEventListener("click", e => {
         keybindButtons.forEach( () => {
-            //submitKeybinds(button, action)
-
             submit();
 
         })
@@ -174,14 +175,9 @@ function resetKeybinds(button, action){
 
 let checkTrue = localStorage.getItem("areBindsUsers");
 let savedBinds = JSON.parse(localStorage.getItem("userKeybinds"));
-console.log("user submitted? ", checkTrue);
 
-console.log("saved binds ", savedBinds);
-
-if(checkTrue === "true"){
-    console.log("sdsd");
+if(checkTrue === "true"){;
     keybindButtons.forEach(button => {
-        console.log("sdji");
         let action = button.dataset.action;
         button.innerText = codeToKey(savedBinds[action]);
     })

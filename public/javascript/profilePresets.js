@@ -23,7 +23,6 @@ onAuthStateChanged(auth, async (user) => {
 
         const presetsQuery = query(collection(db, "users", user.uid, "presets"), orderBy("createdAt", "desc"));
         const userPresets = await sortPresetsByDate(presetsQuery);
-
        showPresets("user", userPresets, profilePosts);
 
         if(likesButton && presetsButton){
@@ -31,14 +30,10 @@ onAuthStateChanged(auth, async (user) => {
                 const likedPresetsQuery = await query(collection(db, "users", user.uid, "likes"), orderBy("likedAt", "desc"));
                 const likedPresets = await sortPresetsByDate(likedPresetsQuery);
 
-                console.log("Number of liked presets:", likedPresets.length);
-                console.log("Liked presets:", likedPresets);
-
                 profilePosts.classList.remove("active");
                 profileLikes.classList.add("active");
                 likesButton.classList.add("active");
                 presetsButton.classList.remove("active");
-
                 showPresets("likes", likedPresets, profileLikes);
 
                 const dislikeButton = document.querySelectorAll(".dislike-button");

@@ -9,7 +9,6 @@ export function showPresets(user, presets, profilePosts){
         const presetData = preset.data();
         userPresets[presetName] = user === "likes" ? presetData.presetData.presetValues : presetData.presetValues;
 
-
         let calculatedHeight;
         let min = -12;
         let max = 12;
@@ -92,7 +91,6 @@ export function showPresets(user, presets, profilePosts){
                             <span>${presetName}</span>
                             <button class="delete delete-preset-button" >
                            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                            
                             <svg width="100%" height="100%" viewBox="0 0 3 3" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                                 <g transform="matrix(1,0,0,1,-1,-1)">
                                     <g transform="matrix(1,0,0,1,-3,-3)">
@@ -117,9 +115,6 @@ export function showPresets(user, presets, profilePosts){
                                     </g>
                                 </g>
                             </svg>
-
-
-
                             </button>
                         </div>
                     </div>`;

@@ -16,7 +16,6 @@ let username, userPresets;
 
 // pridani event listeneru na input pole pro hledani uzivatelu
 searchInput.addEventListener("input", async () => {
-
     searchResult.classList.add("active");
 
     // ziskani uzivatelskeho id z input pole
@@ -70,7 +69,5 @@ searchInput.addEventListener("input", async () => {
             no user found
         `
     }
-
-
 })
 
