@@ -12,12 +12,14 @@
 </ul>
 
 <h2>Built With</h2>
-  <li><b>HTML</b></li>
-  <li><b>SCSS</b></li>
-  <li><b>JavaScript</b></li>
-  <li><b>Firebase</b> - storing presets, profiles, color themes</li>
-  <li><b>Web Audio API</b> - EQ processing, audio upload, tempo change</li>
-  <li><b>Waveform.js</b> - visualizing music with waveform</li>
-  <li><b>BeatDetect.js</b></li>
+  <ul>
+    <li><b>HTML</b></li>
+    <li><b>SCSS</b></li>
+    <li><b>JavaScript</b></li>
+    <li><b>Firebase</b> - storing presets, profiles, color themes</li>
+    <li><b>Web Audio API</b> - EQ processing, audio upload, tempo change</li>
+    <li><b>Waveform.js</b> - visualizing music with waveform</li>
+    <li><b>BeatDetect.js</b></li>
+  </ul>
 
   
