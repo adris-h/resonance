@@ -22,7 +22,17 @@
   </ul>
 
   <h2>⟡ Screenshots</h2>
-  
+  <div >
+    <div>
+      <img width="500" height="300" alt="Screenshot 2026-03-09 at 20 00 38" src="https://github.com/user-attachments/assets/a4c61f70-4729-4d05-a18a-c72d96bd93be" />
+    </div>
+    <div>
+      <img width="500" height="300" alt="Screenshot 2026-03-09 at 20 00 48" src="https://github.com/user-attachments/assets/f73c5d87-0707-4148-af02-a9bc14cebb3a" />
+  </div>
+
   
   <h2>⟡ About</h2>
   <p>This app was built as a half-year project. I wanted to explore the Web Audio API and build something genuinely fun, turns out it was more difficult than I thought it would be, but I made it work (kinda). Learned a ton about audio processing along the way.</p>
+  
+  <h2>⟡ Credits</h2>
+  <p>The app contains a library and all the songs were made by my friend <a href="https://open.spotify.com/artist/6gclKPlpzyCCAzYaGDkgBX">asphinal</a>. Go check him out! </p>
