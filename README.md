@@ -21,4 +21,8 @@
     <li><b>BeatDetect.js</b></li>
   </ul>
 
+  <h2>⟡ Screenshots</h2>
   
+  
+  <h2>⟡ About</h2>
+  <p>This app was built as a half-year project. I wanted to explore the Web Audio API and build something genuinely fun, turns out it was more difficult than I thought it would be, but I made it work (kinda). Learned a ton about audio processing along the way.</p>
