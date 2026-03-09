@@ -1,17 +1,16 @@
-<h1>Resonance</h1>
+<h1>♫ Resonance</h1>
 <p>A fully functional music mixing and equalizer app built with vanilla JavaScript, HTML, and SCSS. Created as a half-year school project.</p>
 
-<h2>Features</h2>
+<h2>⟡ Features</h2>
 <ul>
-  <li><b>Equlizer</b> - </li>
-  <li><b>Visualizer/Waveform</b> - </li>
-  <li><b>Audio File Upload</b> - </li>
-  <li><b>Beat Detection</b> - </li>
-  <li><b>Preset Saver</b> - </li>
-  <li><b>User Profiles</b> - </li>
+  <li><b>EQ</b> - tweak bass, mids, lows</li>
+  <li><b>Visualizer/Waveform</b> - visualize your music with waveform</li>
+  <li><b>Audio File Upload</b> - load your own tracks directly in the browser</li>
+  <li><b>Beat Detection</b> - app reacts to the beat of uploaded tracks</li>
+  <li><b>Presets & Profiles</b> - save & sync your eq presets and app settings via firebase</li>
 </ul>
 
-<h2>Built With</h2>
+<h2>⟡ Built With</h2>
   <ul>
     <li><b>HTML</b></li>
     <li><b>SCSS</b></li>
